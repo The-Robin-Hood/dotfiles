@@ -1,0 +1,28 @@
+[
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 276,
+                "origin_hash": "1fcff82a38587dcf5ba131085e0ffb0d"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "Control_L + Super_L +  Right",
+        "name": "Windows Right",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 275,
+                "origin_hash": "1fcff82a38587dcf5ba131085e0ffb0d"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "Control_L + Super_L +  Left",
+        "name": "Windows Left",
+        "mapping_type": "key_macro"
+    }
+]

@@ -1,0 +1,9 @@
+[user]
+    email = ping@ansari.wtf
+    name = Ansari
+[init]
+	defaultBranch = main
+[alias]
+	lg = log --oneline --graph --all
+[core]
+	editor = vim
