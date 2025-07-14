@@ -7,3 +7,5 @@
 	lg = log --oneline --graph --all
 [core]
 	editor = vim
+[fetch]
+	prune = true

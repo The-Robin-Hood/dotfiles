@@ -1,4 +1,4 @@
-theme = ayu
+theme = "Ayu Mirage"
 
 keybind = ctrl+shift+w=close_window
 keybind = ctrl+shift+e=new_split:right
@@ -15,5 +15,4 @@ cursor-color = lightgreen
 
 cursor-style = bar
 cursor-style-blink = true
-shell-integration = none
-# shell-integration-features = none
+shell-integration-features = no-cursor
