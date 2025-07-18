@@ -1,16 +1,15 @@
-theme = "Ayu Mirage"
+theme = catppuccin-mocha
 
 keybind = ctrl+shift+w=close_window
 keybind = ctrl+shift+e=new_split:right
 keybind = ctrl+shift+o=new_split:down
 keybind = ctrl+shift+r=reload_config
 # keybind = ctrl+scroll=increase_font_size
-# keybind = global:super+space=toggle_quick_terminal
 
+font-family = Hack Nerd Font
 
 background-opacity = 0.95
 
-# title = " "
 cursor-color = lightgreen
 
 cursor-style = bar

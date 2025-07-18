@@ -6,9 +6,15 @@
 export DEV="$HOME/dev"
 export ZSH="$HOME/.oh-my-zsh"
 export EDITOR='vim'
-
+export BUN_INSTALL="$HOME/.bun"
+export ANDROID_HOME="$HOME/Android/Sdk"
+export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+export ANDROID_SWT=/usr/share/java
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
+export NVM_DIR="$HOME/.nvm"
+export PATH="$PATH:$BUN_INSTALL/bin:$ANDROID_HOME/platform-tools:$JAVA_HOME:$ANDROID_HOME/emulator"
 #--------------------------------------------------------------------------------
-# OH MY ZSH
+# SOURCING
 #--------------------------------------------------------------------------------
 
 ZSH_THEME="custom-gozilla"
@@ -17,6 +23,12 @@ zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 plugins=(git zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
+source <(fzf --zsh)
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" 
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+
+[ -s "/home/robinhood/.bun/_bun" ] && source "/home/robinhood/.bun/_bun"
 
 #--------------------------------------------------------------------------------
 # MISC 
@@ -37,7 +49,7 @@ fi
 alias cdd="cd $DEV"
 alias src="source $HOME/.zshrc"
 alias la="ls -a"
-
+alias ccat="bat --color=always"
 #--------------------------------------------------------------------------------
 # FUNCTIONS
 #--------------------------------------------------------------------------------
@@ -76,6 +88,14 @@ ls() {
   else
     command ls --color=tty "$@"
   fi
+}
+
+#--------------------------------------------------------------------------------
+
+ff() {
+  local files
+  files=$(fzf --layout=reverse --multi --preview="bat --color=always {}" --exit-0) || return
+  [ -n "$files" ] && vim "${(@f)files}"
 }
 
 #--------------------------------------------------------------------------------
