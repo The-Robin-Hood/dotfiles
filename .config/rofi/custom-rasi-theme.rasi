@@ -1,0 +1,25 @@
+configuration{
+    display-run: "CMD :";
+    display-drun: "Apps :";    
+    display-calc: "Calculate :";
+    drun-display-format: "{icon} {name}";
+    show-icons: true;
+    modi: "run,drun,calc";
+}
+
+* {
+    bg0:    #11111b;
+    bg1:    #11111b;
+    bg2:    #4C566A80;
+    bg3:    #b4befe;
+    fg0:rgba(180, 190, 254, 0.5);
+    fg1:    #ECEFF4;
+    fg2:    #D8DEE9;
+    fg3:    #4C566A;
+}
+
+@import "./custom-rasi-template.rasi"
+
+element selected {
+    text-color: @bg1;
+}
