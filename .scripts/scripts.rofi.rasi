@@ -1,0 +1,21 @@
+@import "custom-rasi-theme.rasi"
+
+mainbox {
+    padding:    0px;
+    margin: 0px;
+}
+
+inputbar {
+    enabled:false;
+    padding:0px;
+}
+
+listview {
+    margin:0px;
+    lines:5;
+}
+
+element {
+    padding:        10px 0px;
+    spacing:        0px;
+}
