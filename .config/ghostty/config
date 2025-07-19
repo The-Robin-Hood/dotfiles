@@ -6,7 +6,7 @@ keybind = ctrl+shift+o=new_split:down
 keybind = ctrl+shift+r=reload_config
 # keybind = ctrl+scroll=increase_font_size
 
-font-family = Hack Nerd Font
+font-family = Hack Nerd Font Propo
 
 background-opacity = 0.95
 
