@@ -1,0 +1,18 @@
+{
+  "custom/brightness": {
+    "icon": ["󰃞", "󰃟", "󰃠"],
+    "label": "{percentage}%",
+    "tooltip": "Brightness: {percentage}%\nScroll to adjust, Click to reset",
+    "truncationSize": -1,
+    "execute": "$HOME/.wraith/scripts/brightness.sh get",
+    "executeOnAction": "$HOME/.wraith/scripts/brightness.sh get",
+    "interval": 1000,
+    "hideOnEmpty": false,
+    "scrollThreshold": 2,
+    "actions": {
+      "onScrollUp": "$HOME/.wraith/scripts/brightness.sh set +5",
+      "onScrollDown": "$HOME/.wraith/scripts/brightness.sh set -5",
+      "onMiddleClick": "$HOME/.wraith/scripts/brightness.sh set 10"
+    }
+  }
+}

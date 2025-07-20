@@ -17,7 +17,7 @@ export PATH="$PATH:$BUN_INSTALL/bin:$ANDROID_HOME/platform-tools:$JAVA_HOME:$AND
 # SOURCING
 #--------------------------------------------------------------------------------
 
-ZSH_THEME="custom-gozilla"
+ZSH_THEME="wraith"
 zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 plugins=(git zsh-autosuggestions)

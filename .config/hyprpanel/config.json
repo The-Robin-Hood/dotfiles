@@ -4,7 +4,13 @@
     "*": {
       "left": ["workspaces", "clock"],
       "middle": ["media"],
-      "right": ["volume", "systray", "notifications", "power"]
+      "right": [
+        "volume",
+        "custom/brightness",
+        "systray",
+        "notifications",
+        "power"
+      ]
     }
   },
   "theme.bar.floating": false,

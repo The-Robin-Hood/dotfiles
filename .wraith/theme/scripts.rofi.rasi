@@ -1,4 +1,4 @@
-@import "custom-rasi-theme.rasi"
+@import "wraith-theme.rasi"
 
 mainbox {
     padding:    0px;

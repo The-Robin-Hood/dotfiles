@@ -18,7 +18,7 @@ configuration{
     fg3:    #4C566A;
 }
 
-@import "./custom-rasi-template.rasi"
+@import "./wraith-template.rasi"
 
 element selected {
     text-color: @bg1;

@@ -27,7 +27,6 @@ LOG_DIR="$HOME/.local/var/log"
 mkdir -p "$LOG_DIR"
 LOG_FILE="$LOG_DIR/spring-clean-$(date +%F_%H-%M-%S).log"
 
-# Settings (you can customize these)
 PACCACHE_RETAIN=2     # Keep only the latest 2 versions of packages
 CACHE_DAYS=30         # Delete ~/.cache files older than 30 days
 JOURNAL_RETAIN="7d"   # Keep only 7 days of system logs
