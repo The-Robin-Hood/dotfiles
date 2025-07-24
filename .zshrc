@@ -34,6 +34,9 @@ source <(fzf --zsh)
 # MISC 
 #--------------------------------------------------------------------------------
 
+# Zoxide
+eval "$(zoxide init --cmd cd zsh)"
+
 # SSH Configs
 eval $(keychain -q --eval github)
 

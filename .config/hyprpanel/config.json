@@ -2,18 +2,12 @@
   "bar.customModules.storage.paths": ["/"],
   "bar.layouts": {
     "*": {
-      "left": ["workspaces", "clock"],
-      "middle": ["media"],
-      "right": [
-        "volume",
-        "custom/brightness",
-        "systray",
-        "notifications",
-        "power"
-      ]
+      "left": ["clock", "notifications"],
+      "middle": ["workspaces"],
+      "right": ["volume", "custom/brightness", "systray", "power"]
     }
   },
-  "theme.bar.floating": false,
+  "theme.bar.floating": true,
   "theme.bar.location": "top",
   "theme.bar.buttons.enableBorders": false,
   "theme.bar.border.location": "none",
@@ -28,7 +22,7 @@
   "bar.workspaces.workspaces": 3,
   "bar.windowtitle.custom_title": true,
   "bar.windowtitle.truncation": true,
-  "bar.clock.format": "%d/%m %I:%M%p",
+  "bar.clock.format": "󰥔  %I:%M %p",
   "bar.clock.icon": "󰸗",
   "bar.clock.showIcon": false,
   "theme.bar.buttons.clock.spacing": "0em",
@@ -37,8 +31,8 @@
   "theme.bar.shadow": "0px 1px 2px 1px",
   "theme.bar.shadowMargins": "0px 0px 0px 0px",
   "theme.font.weight": 600,
-  "theme.font.name": "Hack Nerd Font Propo",
-  "theme.font.label": "Hack Nerd Font Propo Bold",
+  "theme.font.name": "JetBrains Nerd Font Propo",
+  "theme.font.label": "JetBrains Nerd Font Propo Bold",
   "theme.font.style": "normal",
   "menus.transition": "crossfade",
   "scalingPriority": "hyprland",
@@ -52,9 +46,9 @@
   "menus.dashboard.directories.enabled": false,
   "menus.dashboard.powermenu.avatar.image": "~/.face.icon",
   "theme.bar.menus.menu.dashboard.profile.size": "10em",
-  "menus.power.showLabel": false,
+  "menus.power.showLabel": true,
   "theme.bar.buttons.modules.power.enableBorder": false,
-  "bar.customModules.power.icon": "",
+  "bar.customModules.power.icon": "",
   "theme.bar.background": "#241f31",
   "theme.bar.transparent": true,
   "theme.bar.buttons.style": "default",
@@ -104,7 +98,7 @@
   "notifications.timeout": 3000,
   "notifications.autoDismiss": true,
   "theme.bar.menus.menu.notifications.height": "25em",
-  "theme.bar.margin_sides": "0em",
+  "theme.bar.margin_sides": "-20px",
   "theme.bar.buttons.separator.margins": "0em",
   "menus.dashboard.powermenu.confirmation": true,
   "bar.workspaces.icons.active": "",
@@ -119,5 +113,13 @@
   "bar.workspaces.numbered_active_indicator": "underline",
   "theme.bar.buttons.workspaces.smartHighlight": true,
   "theme.bar.buttons.workspaces.pill.radius": "2rem * 0.6",
-  "theme.bar.buttons.workspaces.fontSize": "1em"
+  "theme.bar.buttons.workspaces.fontSize": "1em",
+  "bar.notifications.show_total": true,
+  "bar.notifications.hideCountWhenZero": true,
+  "theme.bar.menus.menu.power.buttons.restart.icon_background": "#f38ba8",
+  "theme.bar.menus.menu.power.buttons.restart.text": "#f38ba8",
+  "theme.bar.menus.menu.power.buttons.logout.icon_background": "#f38ba8",
+  "theme.bar.menus.menu.power.buttons.logout.text": "#f38ba8",
+  "theme.bar.menus.menu.power.buttons.sleep.icon_background": "#f38ba8",
+  "theme.bar.menus.menu.power.buttons.sleep.text": "#f38ba8"
 }
