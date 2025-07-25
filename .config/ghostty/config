@@ -10,7 +10,7 @@ font-family = Hack Nerd Font Propo
 
 background-opacity = 0.95
 
-cursor-color = lightgreen
+cursor-color = #b4befe
 
 cursor-style = bar
 cursor-style-blink = true

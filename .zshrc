@@ -53,6 +53,7 @@ alias cdd="cd $DEV"
 alias src="source $HOME/.zshrc"
 alias la="ls -a"
 alias ccat="bat --color=always"
+alias vim=nvim
 #--------------------------------------------------------------------------------
 # FUNCTIONS
 #--------------------------------------------------------------------------------
