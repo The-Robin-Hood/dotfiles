@@ -121,5 +121,6 @@
   "theme.bar.menus.menu.power.buttons.logout.icon_background": "#f38ba8",
   "theme.bar.menus.menu.power.buttons.logout.text": "#f38ba8",
   "theme.bar.menus.menu.power.buttons.sleep.icon_background": "#f38ba8",
-  "theme.bar.menus.menu.power.buttons.sleep.text": "#f38ba8"
+  "theme.bar.menus.menu.power.buttons.sleep.text": "#f38ba8",
+  "notifications.position": "top left"
 }
