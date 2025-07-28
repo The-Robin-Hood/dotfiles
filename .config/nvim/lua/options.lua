@@ -21,7 +21,9 @@ opt.sidescrolloff = 8
 opt.undofile = true
 opt.undolevels = 10000
 opt.updatetime = 200
-opt.timeoutlen = vim.g.vscode and 1000 or 300
+opt.timeoutlen = 1500
+opt.splitbelow = true 
+opt.splitright = true
 
 opt.foldlevel = 99
 opt.signcolumn = "yes"
