@@ -12,6 +12,7 @@ export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
 export ANDROID_SWT=/usr/share/java
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 export NVM_DIR="$HOME/.nvm"
+export FZF_DEFAULT_OPTS="--layout=reverse --height=40%"
 export PATH="$PATH:$BUN_INSTALL/bin:$ANDROID_HOME/platform-tools:$JAVA_HOME:$ANDROID_HOME/emulator"
 #--------------------------------------------------------------------------------
 # SOURCING
@@ -26,8 +27,6 @@ source $ZSH/oh-my-zsh.sh
 source <(fzf --zsh)
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" 
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-
 [ -s "/home/robinhood/.bun/_bun" ] && source "/home/robinhood/.bun/_bun"
 
 #--------------------------------------------------------------------------------
@@ -38,12 +37,12 @@ source <(fzf --zsh)
 eval "$(zoxide init --cmd cd zsh)"
 
 # SSH Configs
-eval $(keychain -q --eval github)
+[ -f ~/.ssh/github ] && eval "$(keychain -q --eval github)"
 
-#Obsidian Hack
-if [[ -n "$SSH_AUTH_SOCK" ]]; then
-  sed -i "s|Exec=.*SSH_AUTH_SOCK=[^ ]\\+ /usr/bin/obsidian %U|Exec=SSH_AUTH_SOCK=$SSH_AUTH_SOCK /usr/bin/obsidian %U|" ~/.local/share/applications/obsidian.desktop
-fi
+#Obsidian Hack - not working with rofi
+# if [[ -n "$SSH_AUTH_SOCK" ]]; then
+#   sed -i "s|Exec=.*SSH_AUTH_SOCK=[^ ]\\+ /usr/bin/obsidian %U|Exec=SSH_AUTH_SOCK=$SSH_AUTH_SOCK /usr/bin/obsidian %U|" ~/.local/share/applications/obsidian.desktop
+# fi
 
 #--------------------------------------------------------------------------------
 # ALIAS
