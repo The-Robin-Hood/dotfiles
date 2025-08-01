@@ -1,10 +1,22 @@
 {
-  "bar.customModules.storage.paths": ["/"],
+  "bar.customModules.storage.paths": [
+    "/"
+  ],
   "bar.layouts": {
     "*": {
-      "left": ["clock", "notifications"],
-      "middle": ["workspaces"],
-      "right": ["volume", "custom/brightness", "systray", "power"]
+      "left": [
+        "clock",
+        "notifications"
+      ],
+      "middle": [
+        "workspaces"
+      ],
+      "right": [
+        "volume",
+        "custom/brightness",
+        "systray",
+        "power"
+      ]
     }
   },
   "theme.bar.floating": true,
