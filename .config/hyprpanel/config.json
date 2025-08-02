@@ -6,7 +6,8 @@
     "*": {
       "left": [
         "clock",
-        "notifications"
+        "notifications",
+        "media"
       ],
       "middle": [
         "workspaces"
@@ -39,7 +40,7 @@
   "bar.clock.showIcon": false,
   "theme.bar.buttons.clock.spacing": "0em",
   "menus.media.hideAuthor": false,
-  "menus.media.displayTime": false,
+  "menus.media.displayTime": true,
   "theme.bar.shadow": "0px 1px 2px 1px",
   "theme.bar.shadowMargins": "0px 0px 0px 0px",
   "theme.font.weight": 600,
@@ -58,7 +59,7 @@
   "menus.dashboard.directories.enabled": false,
   "menus.dashboard.powermenu.avatar.image": "~/.face.icon",
   "theme.bar.menus.menu.dashboard.profile.size": "10em",
-  "menus.power.showLabel": true,
+  "menus.power.showLabel": false,
   "theme.bar.buttons.modules.power.enableBorder": false,
   "bar.customModules.power.icon": "",
   "theme.bar.background": "#241f31",
@@ -116,7 +117,7 @@
   "bar.workspaces.icons.active": "",
   "bar.workspaces.icons.occupied": "",
   "bar.workspaces.icons.available": "",
-  "wallpaper.image": "/home/robinhood/dev/downloads/wallpaper.jpg",
+  "wallpaper.image": "/home/robinhood/.assets/wallpapers/gwen-stacy.jpg",
   "theme.osd.enable": false,
   "menus.volume.raiseMaximumVolume": false,
   "theme.bar.buttons.workspaces.pill.active_width": "9em",
@@ -134,5 +135,11 @@
   "theme.bar.menus.menu.power.buttons.logout.text": "#f38ba8",
   "theme.bar.menus.menu.power.buttons.sleep.icon_background": "#f38ba8",
   "theme.bar.menus.menu.power.buttons.sleep.text": "#f38ba8",
-  "notifications.position": "top left"
+  "notifications.position": "top left",
+  "bar.customModules.power.leftClick": "hyprpanel t powermenu",
+  "menus.power.confirmation": false,
+  "bar.media.format": "{title}",
+  "bar.media.show_label": true,
+  "bar.media.truncation_size": 24,
+  "bar.media.show_active_only": true
 }
