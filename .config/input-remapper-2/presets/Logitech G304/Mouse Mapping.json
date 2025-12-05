@@ -8,7 +8,7 @@
             }
         ],
         "target_uinput": "keyboard",
-        "output_symbol": "Control_L + Super_L +  Right",
+        "output_symbol": "KEY_LEFTCTRL + KEY_LEFTMETA +  KEY_RIGHT",
         "name": "Windows Right",
         "mapping_type": "key_macro"
     },
@@ -21,7 +21,7 @@
             }
         ],
         "target_uinput": "keyboard",
-        "output_symbol": "Control_L + Super_L +  Left",
+        "output_symbol": "KEY_LEFTCTRL + KEY_LEFTMETA +  KEY_LEFT",
         "name": "Windows Left",
         "mapping_type": "key_macro"
     }
