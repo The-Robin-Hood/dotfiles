@@ -58,7 +58,7 @@ alias vim=nvim
 #--------------------------------------------------------------------------------
 
 sync-config() {
-  DOTFILES_DIR="$HOME/dev/.dotfiles"
+  DOTFILES_DIR="$HOME/dotfiles"
 
   echo "⚠️  This will sync all dotfiles from:"
   echo "    $DOTFILES_DIR --> $HOME"
