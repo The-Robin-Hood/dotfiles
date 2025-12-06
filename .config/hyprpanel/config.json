@@ -13,6 +13,7 @@
         "workspaces"
       ],
       "right": [
+        "custom/packages",
         "volume",
         "custom/brightness",
         "systray",

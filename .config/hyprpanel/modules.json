@@ -14,5 +14,22 @@
       "onScrollDown": "$HOME/.wraith/scripts/brightness.sh set -5",
       "onMiddleClick": "$HOME/.wraith/scripts/brightness.sh set 10"
     }
+  },
+
+    "custom/packages": {
+      "icon": {
+          "not-available": "📦", 
+          "available":"⚙️"
+      },
+    "label": "{pkgs_installed}",
+    "tooltip": "Total Installed Packages : {pkgs_installed}\nUpdatable Packages : {pkgs_updatable}",
+    "truncationSize": -1,
+    "execute": "$HOME/.wraith/scripts/packages.sh details",
+    "executeOnAction": "$HOME/.wraith/scripts/packages.sh",
+    "interval": 1000,
+    "hideOnEmpty": false,
+    "actions":{
+      "onLeftClick":  "$HOME/.wraith/scripts/packages.sh"
+    }
   }
 }
