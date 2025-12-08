@@ -1,0 +1,101 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 32,
+  "spacing": 0,
+  "modules-left": [
+    "clock",
+    "custom/packages"
+  ],
+  "modules-center": [
+    "hyprland/workspaces"
+  ],
+  "modules-right": [
+    "custom/brightness",
+    "pulseaudio",
+    "custom/power"
+  ],
+  "hyprland/workspaces": {
+    "disable-scroll": false,
+    "format": "{icon}",
+    "active-only": true,
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "default": ""
+    }
+  },
+  "clock": {
+    "interval": 1,
+    "timezone": "Asia/Kolkata",
+    "format": "󰥔  {:%I:%M %p}",
+    "tooltip-format": "<tt>{calendar}</tt>",
+    "calendar": {
+      "weeks-pos": "",
+      "on-scroll": 1,
+      "mode-mon-col": 3,
+      "format": {
+        "months": "<span size='large' color='#b4befe'><b>{}</b></span>",
+        "weekdays": "<span size='large' color='#f9e2af'><b>{}</b></span>",
+        "days": "<span size='large' color='#cdd6f4'><b>{}</b></span>",
+        "today": "<span size='large' color='#f38ba8'><b><u>{}</u></b></span>"
+      }
+    }
+  },
+  "custom/packages": {
+    "exec": "$HOME/.wraith/scripts/packages.sh details",
+    "interval": 5,
+    "return-type": "json",
+    "cursor":false,
+    "on-click": "$HOME/.wraith/scripts/packages.sh",
+    "tooltip": true
+  },
+  "custom/power": {
+    "format": "󰐥",
+    "tooltip": false,
+    "cursor":false,
+    "menu": "on-click",
+    "menu-file": "~/.config/waybar/power_menu.xml",
+    "menu-actions": {
+      "shutdown": "shutdown",
+      "reboot": "reboot",
+      "suspend": "systemctl suspend"
+    }
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}% ",
+    "format-muted": "   0%",
+    "format-icons": {
+      "headphone": " ",
+      "headset": " ",
+      "default": [
+        " ",
+        "  ",
+        "  "
+      ]
+    },
+    "cursor":false,
+    "on-click-right": "pavucontrol -t 3",
+    "on-click": "pactl -- set-sink-mute 0 toggle",
+    "tooltip": false
+  },
+  "custom/brightness": {
+    "interval": 1,
+    "exec": "$HOME/.wraith/scripts/brightness.sh get",
+    "return-type": "json",
+    "format": "{icon}{percentage}%",
+    "cursor":false,
+    "on-click": "$HOME/.wraith/scripts/brightness.sh set 10",
+    "on-scroll-up": "$HOME/.wraith/scripts/brightness.sh set +5",
+    "on-scroll-down": "$HOME/.wraith/scripts/brightness.sh set -5",
+    "format-icons": {
+      "default": [
+        "󰃞  ",
+        "󰃟  ",
+        "󰃠  "
+      ]
+    },
+    "tooltip": false
+  }
+}

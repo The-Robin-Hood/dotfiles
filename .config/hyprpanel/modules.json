@@ -18,8 +18,8 @@
 
     "custom/packages": {
       "icon": {
-          "not-available": "📦", 
-          "available":"⚙️"
+          "not-available": "", 
+          "available":""
       },
     "label": "{pkgs_installed}",
     "tooltip": "Total Installed Packages : {pkgs_installed}\nUpdatable Packages : {pkgs_updatable}",

@@ -1,8 +1,18 @@
 packages_total() {
     total=$(pacman -Qe | wc -l)
     updates=$(pacman -Qu | wc -l)
-    icon=$([[ $updates -gt 0 ]] && echo "available" || echo "not-available")
-    printf '{"pkgs_installed": %d,"pkgs_updatable":%d,"alt":"%s"}\n' "$total" "$updates" "$icon"
+
+    if [ "$updates" -gt 0 ]; then
+        text="  $total"
+        tooltip="Updates available"
+    else
+        text="󰏖  $total"
+        tooltip="Installed Packages: $total\nNo Updates available"
+    fi
+
+    # Output JSON for Waybar
+    printf '{"text":"%s","tooltip":"%s"}\n' "$text" "$tooltip"
+
 }
 
 
