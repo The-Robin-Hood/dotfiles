@@ -7,32 +7,37 @@
   "modules-center": ["hyprland/workspaces#main"],
   "modules-right": [
     "hyprland/workspaces#special",
+    "custom/special_workspaces",
     "custom/brightness",
     "pulseaudio",
     "custom/power"
   ],
+
   "hyprland/workspaces#main": {
     "disable-scroll": false,
-    "format": "{icon}",
-    "active-only": true,
     "show-special": false,
-      "persistent-workspaces": {
-    "*": [1, 2, 3]
-  },
+    "format": "{icon}",
     "format-icons": {
       "1": "",
       "2": "",
-      "3": ""
+      "3": "",
+      "music": "󰎆"
+    },
+    "persistent-workspaces": {
+      "*": ["1", "2", "3"]
     }
   },
+
   "hyprland/workspaces#special": {
-    "format": "{icon}",
+    "disable-scroll": false,
     "show-special": true,
-    "ignore-workspaces": ["1", "2", "3"],
+    "format": "{icon}",
     "format-icons": {
-      "music": "󰝚"
-    }
+      "music": "󰎆"
+    },
+    "ignore-workspaces": ["^([0-9]|10)$"]
   },
+
   "clock": {
     "interval": 1,
     "timezone": "Asia/Kolkata",

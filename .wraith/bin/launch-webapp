@@ -4,7 +4,7 @@ browser=$(xdg-settings get default-web-browser)
 
 case $browser in
 google-chrome* | brave-browser* | microsoft-edge* | opera* | vivaldi* | helium*) ;;
-*) browser="chromium.desktop" ;;
+*) browser="chromium" ;;
 esac
 
-exec setsid uwsm-app -- chromium --app="$1" "${@:2}"
+exec setsid uwsm-app -- $browser --app="$1" "${@:2}"
