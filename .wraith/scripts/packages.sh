@@ -29,7 +29,7 @@ packages_installed_explicitly() {
 
         out+=$'📦  '"<b>$name</b> ($ver)"$'\n'"<span size=\"small\">$short_desc</span>"$'\x0f'
 
-    done < <(pacman -Qqe)
+    done < <(pacman -Qiqe | awk -F': ' '/^Name/ {name=$2}/^Install Date/ {print $2 " " name}' | sort -r | awk '{print $NF}')
     printf "%b" "$out" | rofi -dmenu -sep $'\x0f' -eh 2 -i -p "Packages :" -no-show-icons -markup-rows -no-cycle
 }
 

@@ -1,6 +1,6 @@
 configuration{
     display-run: "CMD :";
-    display-drun: "Apps :";    
+    display-drun: "";    
     display-calc: "Calculate :";
     drun-display-format: "{icon} {name}";
     show-icons: true;

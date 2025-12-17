@@ -13,7 +13,8 @@ export ANDROID_SWT=/usr/share/java
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 export NVM_DIR="$HOME/.nvm"
 export FZF_DEFAULT_OPTS="--layout=reverse --height=40%"
-export PATH="$PATH:$BUN_INSTALL/bin:$ANDROID_HOME/platform-tools:$JAVA_HOME:$ANDROID_HOME/emulator"
+export WRAITH_SCRIPTS="$HOME/.wraith/scripts"
+export PATH="$PATH:$BUN_INSTALL/bin:$ANDROID_HOME/platform-tools:$JAVA_HOME:$ANDROID_HOME/emulator:$WRAITH_SCRIPTS"
 #--------------------------------------------------------------------------------
 # SOURCING
 #--------------------------------------------------------------------------------
