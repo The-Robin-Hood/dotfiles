@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Install Apps
+Exec=launch-or-focus-tui "install-apps" "install-app"
+Terminal=false
+Type=Application
+Icon=/home/robin/.assets/icons/shell.png
+StartupNotify=true
+

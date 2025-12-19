@@ -1,0 +1,63 @@
+#!/bin/bash
+set -e
+
+gum style --foreground 212 --border double --border-foreground 212 --padding "1 2" --align center "
+╻ ╻┏━┓┏━┓╻╺┳╸╻ ╻   ┏━╸┏━┓┏━┓┏━╸╺┳╸
+┃╻┃┣┳┛┣━┫┃ ┃ ┣━┫   ┃  ┣┳┛┣━┫┣╸  ┃ 
+┗┻┛╹┗╸╹ ╹╹ ╹ ╹ ╹   ┗━╸╹┗╸╹ ╹╹   ╹ 
+
+Install a Web App or TUI App to your system
+"
+
+if [ "$#" -lt 3 ]; then
+  TUI_OR_WEBAPP=$(gum choose "Web App" "TUI App")
+  APP_NAME=$(gum input --prompt "Name> " --placeholder "Github Desktop")
+  ICON_REF=$(gum input --prompt "Icon URL/Path> " --placeholder "https://example.com/icon.png")
+  SINGLETON=$(gum confirm "Singleton app (focus existing instance)?" && echo "yes" || echo "no")
+
+  if [ "$TUI_OR_WEBAPP" == "Web App" ]; then
+    APP_LOCATION=$(gum input --prompt "URL> " --placeholder "https://github.com")
+    DOMAIN=$(echo "$APP_LOCATION" | awk -F[/:] '{print $4}' | sed 's/^www\.//')
+    APP_ID="chrome-$DOMAIN"
+    [[ "$SINGLETON" == "yes" ]] && CUSTOM_EXEC="launch-or-focus-webapp \"$APP_ID\" \"$APP_LOCATION\"" || CUSTOM_EXEC="launch-webapp \"$APP_LOCATION\""
+  else
+    APP_ID=$(echo "$APP_NAME" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | sed 's/[^a-z0-9-]//g')
+    APP_LOCATION=$(gum input --prompt "Path> " --placeholder "/usr/bin/htop")
+    [[ "$SINGLETON" == "yes" ]] && CUSTOM_EXEC="launch-or-focus-tui \"$APP_ID\" \"$APP_LOCATION\"" || CUSTOM_EXEC="launch-tui \"$APP_ID\" \"$APP_LOCATION\""
+  fi
+else
+  APP_NAME="$1"; APP_LOCATION="$2"; ICON_REF="$3"; CUSTOM_EXEC="$4"; MIME_TYPES="$5"
+fi
+
+# Validation
+[[ -z "$APP_NAME" || -z "$APP_LOCATION" || -z "$ICON_REF" ]] && { echo "Missing required fields"; exit 1; }
+
+APP_ID=$(echo "$APP_NAME" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | sed 's/[^a-z0-9-]//g')
+
+# Icon Management
+ICON_DIR="$HOME/.assets/icons"
+mkdir -p "$ICON_DIR"
+if [[ $ICON_REF =~ ^https?:// ]]; then
+  ICON_PATH="$ICON_DIR/$APP_ID.png"
+  curl -sL -o "$ICON_PATH" "$ICON_REF" || { echo "Icon download failed"; exit 1; }
+else
+  ICON_PATH="$ICON_DIR/$ICON_REF"
+fi
+
+# Create .desktop file
+DESKTOP_FILE="$HOME/.local/share/applications/$APP_ID.desktop"
+
+cat >"$DESKTOP_FILE" <<EOF
+[Desktop Entry]
+Version=1.0
+Name=$APP_NAME
+Exec=$CUSTOM_EXEC
+Terminal=false
+Type=Application
+Icon=$ICON_PATH
+StartupNotify=true
+$( [[ -n "$MIME_TYPES" ]] && echo "MimeType=$MIME_TYPES" )
+EOF
+
+chmod +x "$DESKTOP_FILE"
+gum spin --spinner dot --title "Installation complete! You can now find '$APP_NAME' in your app launcher." -- sleep 3

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+WINDOW_PATTERN="$1"
+shift
+LAUNCH_COMMAND="launch-webapp $@"
+
+exec launch-or-focus "$WINDOW_PATTERN" "$LAUNCH_COMMAND"

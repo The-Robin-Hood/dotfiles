@@ -1,0 +1,6 @@
+#!/bin/bash
+
+APP_ID="org.wraith.$(basename $1)"
+COMMAND="$2"
+
+exec setsid uwsm-app -- xdg-terminal-exec --app-id=$APP_ID -e "$COMMAND" "${@:3}"
