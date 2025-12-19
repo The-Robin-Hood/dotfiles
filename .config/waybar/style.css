@@ -30,6 +30,7 @@ menuitem:hover {
 
 #clock,
 #custom-packages,
+#custom-about,
 #custom-power,
 #custom-brightness,
 #pulseaudio,
@@ -41,12 +42,15 @@ menuitem:hover {
   border-radius: 7px;
 }
 
-#clock {
-  margin-left: 14px;
+#custom-about {
+  margin-left: 14px;  
+  padding: 0px 10px;
+  min-width: 20px;
 }
 
+#clock,
 #custom-packages {
-  margin-left: 10px;
+  margin-left: 5px;
 }
 
 #custom-power {

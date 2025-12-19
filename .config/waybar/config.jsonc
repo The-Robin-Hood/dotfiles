@@ -3,7 +3,7 @@
   "position": "top",
   "height": 32,
   "spacing": 0,
-  "modules-left": ["clock", "custom/packages"],
+  "modules-left": ["custom/about","clock", "custom/packages"],
   "modules-center": ["hyprland/workspaces#main"],
   "modules-right": [
     "hyprland/workspaces#special",
@@ -12,6 +12,13 @@
     "pulseaudio",
     "custom/power"
   ],
+
+  "custom/about": {
+    "format": "󰣇",
+    "interval": 0,
+    "tooltip-format": "About System",
+    "on-click": "launch-or-focus-tui \"about\" \"bash -c 'fastfetch; read -n 1 -s'\"",
+  },
 
   "hyprland/workspaces#main": {
     "disable-scroll": false,
