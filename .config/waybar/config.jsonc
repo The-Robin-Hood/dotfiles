@@ -20,8 +20,7 @@
     "format-icons": {
       "1": "",
       "2": "",
-      "3": "",
-      "music": "󰎆"
+      "3": ""
     },
     "persistent-workspaces": {
       "*": ["1", "2", "3"]
@@ -33,7 +32,8 @@
     "show-special": true,
     "format": "{icon}",
     "format-icons": {
-      "music": "󰎆"
+      "music": "󰎆",
+      "temp":"󰒋"
     },
     "ignore-workspaces": ["^([0-9]|10)$"]
   },
@@ -70,8 +70,9 @@
     "menu": "on-click",
     "menu-file": "~/.config/waybar/power_menu.xml",
     "menu-actions": {
-      "shutdown": "shutdown",
-      "reboot": "reboot",
+      "shutdown": "systemctl poweroff --no-wall",
+      "reboot": "systemctl reboot --no-wall",
+      "lock": "hyprlock",
       "suspend": "systemctl suspend"
     }
   },
