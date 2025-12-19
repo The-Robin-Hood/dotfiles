@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Docker Desktop
+Exec=launch-or-focus-tui "docker-desktop" "lazydocker"
+Terminal=false
+Type=Application
+Icon=/home/robin/.assets/icons/docker-desktop.png
+StartupNotify=true
+

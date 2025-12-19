@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Google Gemini
+Exec=launch-or-focus-webapp "chrome-gemini.google.com" "https://gemini.google.com"
+Terminal=false
+Type=Application
+Icon=/home/robin/.assets/icons/google-gemini.png
+StartupNotify=true
+

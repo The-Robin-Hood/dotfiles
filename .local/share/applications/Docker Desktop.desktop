@@ -1,9 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Name=Docker-Desktop
-Comment=A simple terminal UI for Docker and Docker-compose
-Exec=xdg-terminal-exec --app-id=org.wraith.lazydocker -e lazydocker
-Terminal=True
-Type=Application
-Icon=~/.assets/icons/docker.png
-StartupNotify=false
