@@ -1,175 +1,206 @@
 #!/usr/bin/env zsh
 # ============================================================================
-# Arch Linux "Spring‑Clean" Maintenance Script
+# Arch Linux Maintenance TUI
 # ============================================================================
 
-set -euo pipefail
-trap 'echo "[!] Script aborted by user."; exit 1' INT TERM
+center_box() {
+  local content="$1"
+  local term_width box_width pad
+
+  term_width=$(tput cols)
+  
+  # Get the width of the content (rough estimate)
+  box_width=$(echo "$content" | wc -L)
+  
+  pad=$(( (term_width - box_width) / 2 ))
+  (( pad < 0 )) && pad=0
+
+  # Add left padding to each line of the box
+  echo "$content" | while IFS= read -r line; do
+    printf "%*s%s\n" "$pad" "" "$line"
+  done
+}
+
+cleanup() {
+  echo ""
+  tput cnorm 2>/dev/null || true
+  show_header
+  gum style --foreground "$MOCHA_RED" --bold "Operation cancelled by user."
+  sub_text "Press any key to exit..."
+  read -n 1
+  exit 130
+}
+
+gum_safe() {
+  local resultCode
+  gum "$@"
+  resultCode=$?
+
+  if (( resultCode == 130 )); then
+    cleanup
+  elif (( resultCode != 0 )); then
+    return $resultCode
+  fi
+}
+
 
 # -------------------------------------
-# 0: Detect AUR helper (paru or yay)
-# -------------------------------------
 
-if command -v paru &>/dev/null; then
-  AUR=paru
-elif command -v yay &>/dev/null; then
-  AUR=yay
-else
-  echo "Error: You need to install either 'paru' or 'yay' to use this script." >&2
-  exit 1
-fi
+export MOCHA_MAUVE="#cba6f7"
+export MOCHA_LAVENDER="#b4befe"
+export MOCHA_GREEN="#a6e3a1"
+export MOCHA_RED="#f38ba8"
+export MOCHA_TEXT="#cdd6f4"
+export MOCHA_OVERLAY="#6c7086"
+export MOCHA_BASE="#1e1e2e"
+
+# -- Gum Defaults --
+export GUM_SPIN_SPINNER="dot"
+export GUM_SPIN_SPINNER_FOREGROUND="$MOCHA_LAVENDER"
+export GUM_SPIN_TITLE_FOREGROUND="$MOCHA_TEXT"
+export GUM_CONFIRM_PROMPT_FOREGROUND="$MOCHA_MAUVE"
+export GUM_CONFIRM_SELECTED_BACKGROUND="$MOCHA_MAUVE"
+export GUM_CONFIRM_SELECTED_FOREGROUND="$MOCHA_BASE"
+export GUM_CONFIRM_UNSELECTED_FOREGROUND="$MOCHA_OVERLAY"
+export GUM_STYLE_BORDER="double"
+export GUM_STYLE_BORDER_FOREGROUND="$MOCHA_MAUVE"
+export GUM_STYLE_FOREGROUND="$MOCHA_TEXT"
 
 # -------------------------------------
-# 1: Set up logging and configuration
+# Dependency Checks
 # -------------------------------------
 
 LOG_DIR="$HOME/.local/var/log"
 mkdir -p "$LOG_DIR"
-LOG_FILE="$LOG_DIR/spring-clean-$(date +%F_%H-%M-%S).log"
+LOG_FILE="$LOG_DIR/maintenance-$(date +%F_%H-%M-%S).log"
 
-PACCACHE_RETAIN=2     # Keep only the latest 2 versions of packages
-CACHE_DAYS=30         # Delete ~/.cache files older than 30 days
-JOURNAL_RETAIN="7d"   # Keep only 7 days of system logs
+CACHE_TARGETS=(
+  "$HOME/.cache/thumbnails"
+  "$HOME/.cache/yay"
+  "$HOME/.cache/paru"
+  "$HOME/.cache/pip"
+  "$HOME/.cache/npm"
+)
 
-exec > >(tee -a "$LOG_FILE") 2>&1  # Everything goes to log file AND terminal
+AUR_HELPER="yay"
 
-# -------------------------------------
-# Helper functions
-# -------------------------------------
+if ! command -v gum &>/dev/null || ! command -v yay &>/dev/null || ! command -v paccache &>/dev/null; then
+  command -v gum &>/dev/null || { echo "❌ Error: 'gum' is not installed. Please install it to proceed."; exit 1; }
+  command -v yay &>/dev/null || { gum style --foreground "$MOCHA_RED" "❌ Error: No AUR helper (paru/yay) found."; exit 1; }
+  command -v paccache &>/dev/null || { gum style --foreground "$MOCHA_RED" "❌ Error: 'pacman-contrib' is missing." "Install it with: sudo pacman -S pacman-contrib"; exit 1; }
+fi
 
-confirm() {
-  read -r -p "${1:-Are you sure? [y/N]} " ans
-  [[ "$ans" =~ ^([yY][eE][sS]|[yY])$ ]]
+show_header() {
+  clear
+  header=$(gum_safe style \
+    --align "center" \
+    --border "double" \
+    --margin "1" \
+    --padding "1 2" \
+    --border-foreground "$MOCHA_MAUVE" \
+    "☕ Arch Linux Spring-Clean"
+  )
+  center_box "$header"
 }
 
-announce() {
-  printf "\n\e[1;32m🔹 %s\e[0m\n" "$1"
-}
-
-step() {
-  printf "\n\e[1;34m==> %s\e[0m\n" "$1"
-}
-
-# -------------------------------------
-# Optional: Check for --upgrade flag
-# -------------------------------------
-
-DO_UPGRADE=false
-while [[ $# -gt 0 ]]; do
-  case $1 in
-    -u|--upgrade) DO_UPGRADE=true; shift ;;
-    -h|--help)
-      echo "Usage: $0 [--upgrade]"
-      echo "       --upgrade   Also upgrade all system and AUR packages"
-      exit 0 ;;
-    *) echo "Unknown option: $1" ; exit 2 ;;
-  esac
-done
-
-announce "Arch Linux Spring‑Clean Starting — Using AUR Helper: $AUR"
-echo "Log file saved to: $LOG_FILE"
-
-# -------------------------------------
-# 2: Optional System Upgrade
-# -------------------------------------
-
-if $DO_UPGRADE; then
-  step "UPGRADING SYSTEM PACKAGES"
-  echo "This will update all official and AUR packages."
-  if confirm "Continue with system upgrade? [y/N]"; then
-    $AUR -Syu --ask 4
-    echo "NOTE: After upgrade, run: sudo pacdiff — to handle .pacnew files."
+run_task() {
+  local label="$1"
+  local cmd="$2"
+  
+  if gum_safe spin --title "$label" -- sh -c "$cmd >> $LOG_FILE 2>&1"; then
+    gum_safe style --foreground "$MOCHA_GREEN" --border none "✓ $label completed"
   else
-    echo "Skipped system upgrade."
+    gum_safe style --foreground "$MOCHA_RED" --border none "✗ $label failed! Check logs."
+  fi
+}
+
+section_title() {
+  echo ""
+  gum_safe style --foreground "$MOCHA_MAUVE" --bold --border none "$1"
+}
+
+sub_text() {
+  gum_safe style --foreground "$MOCHA_OVERLAY" --border none "$1"
+}
+
+# -------------------------------------
+#  Execution
+# -------------------------------------
+
+show_header
+
+# --- Step 1 ---
+section_title "1. System Upgrade"
+if gum_safe confirm "Upgrade system packages?"; then
+  sudo -v
+  $AUR_HELPER -Syu
+else
+  sub_text "Skipped upgrade."
+fi
+
+# --- Step 2 ---
+section_title "2. Pacman Cache"
+current_pkg_cache=$(du -sh /var/cache/pacman/pkg 2>/dev/null | cut -f1)
+
+if gum_safe confirm "Clean pacman cache? (Current: $current_pkg_cache)"; then
+  run_task "Pruning package cache" "sudo paccache -vrk 2 && sudo paccache -ruk0"
+else
+  sub_text "Skipped package cache."
+fi
+
+# --- Step 3 ---
+section_title "3. Orphaned Packages"
+ORPHANS=$($AUR_HELPER -Qtdq)
+
+if [[ -z "$ORPHANS" ]]; then
+  gum_safe style --foreground "$MOCHA_GREEN" --border none "✓ No orphaned packages found."
+else
+  gum_safe style --foreground "$MOCHA_PEACH" --border none "Found orphaned packages:"
+  echo "$ORPHANS" | gum_safe format
+
+  if gum_safe confirm "Remove orphaned packages?"; then
+    run_task "Removing orphaned packages" "sudo $AUR_HELPER -Rns $ORPHANS"
+  else
+    sub_text "Skipped orphan removal."
   fi
 fi
 
-# -------------------------------------
-# 3: Clean Pacman Cache
-# -------------------------------------
+# --- Step 4 ---
+section_title "4. User Cache"
+sub_text "Targets: thumbnails, yay, paru, pip, npm"
 
-step "CLEANING PACKAGE CACHE"
-current_cache=$(du -sh /var/cache/pacman/pkg | cut -f1)
-echo "Current cache size: $current_cache"
-
-if confirm "Clean old package cache (keep last $PACCACHE_RETAIN)? [y/N]"; then
-  sudo paccache -vrk $PACCACHE_RETAIN
-  sudo paccache -ruk0
-  new_cache=$(du -sh /var/cache/pacman/pkg | cut -f1)
-  echo "New cache size: $new_cache"
+if gum_safe confirm "Clean specific cache targets?"; then
+  for target in "${CACHE_TARGETS[@]}"; do
+    [[ -d "$target" ]] && run_task "Cleaning $target" "rm -rf $target/*"
+  done
 else
-  echo "Skipped cache cleanup."
+  sub_text "Skipped user cache."
 fi
 
-# -------------------------------------
-# 4: Remove Orphaned Packages
-# -------------------------------------
+# --- Step 5 ---
+section_title "5. System Logs"
+current_journal=$(journalctl --disk-usage | awk '{print $NF}')
 
-step "REMOVING UNUSED (ORPHANED) PACKAGES"
-mapfile -t ORPHANS < <($AUR -Qtdq)
-if ((${#ORPHANS[@]})); then
-  echo "Found ${#ORPHANS[@]} orphaned packages:"
-  printf '%s\n' "${ORPHANS[@]}"
-  if confirm "Remove these unneeded packages? [y/N]"; then
-    sudo pacman -Rns "${ORPHANS[@]}"
-  else
-    echo "Skipped removing orphans."
-  fi
+if gum_safe confirm "Vacuum logs > 7d? (Current: $current_journal)"; then
+  run_task "Rotating logs" "sudo journalctl --rotate"
+  run_task "Vacuuming logs" "sudo journalctl --vacuum-time=7d"
 else
-  echo "No orphaned packages found. All clean!"
+  sub_text "Skipped logs."
 fi
 
-# -------------------------------------
-# 5: Prune ~/.cache (user cache)
-# -------------------------------------
+# --- Step 6 ---
+section_title "6. Service Health"
+failed_count=$(systemctl list-units --state=failed --no-legend | wc -l)
 
-step "CLEANING ~/.cache DIRECTORY"
-before_cache=$(du -sh ~/.cache | cut -f1)
-echo "Cache size before cleanup: $before_cache"
-
-if confirm "Delete files older than $CACHE_DAYS days from ~/.cache? [y/N]"; then
-  find ~/.cache -type f -mtime +$CACHE_DAYS -print -delete
-  find ~/.cache -type d -empty -print -delete
-  after_cache=$(du -sh ~/.cache | cut -f1)
-  echo "Cache size after cleanup: $after_cache"
+if (( failed_count == 0 )); then
+  gum_safe style --foreground "$MOCHA_GREEN" --border none "✓ All systems operational."
 else
-  echo "Skipped cleaning ~/.cache."
+  gum_safe style --foreground "$MOCHA_RED" --border none "⚠️  $failed_count services failed:"
+  systemctl --failed --no-pager --plain | gum_safe format
 fi
 
-# -------------------------------------
-# 6: Clean old system logs (journald)
-# -------------------------------------
-
-step "VACUUMING SYSTEM LOGS (journald)"
-before_logs=$(journalctl --disk-usage | awk '{print $NF}')
-echo "Current journal size: $before_logs"
-
-if confirm "Delete logs older than $JOURNAL_RETAIN? [y/N]"; then
-  sudo journalctl --rotate
-  sudo journalctl --vacuum-time=$JOURNAL_RETAIN
-  after_logs=$(journalctl --disk-usage | awk '{print $NF}')
-  echo "Journal size after vacuum: $after_logs"
-else
-  echo "Skipped journald cleanup."
-fi
-
-# -------------------------------------
-# 7: Check for Failed Services
-# -------------------------------------
-
-step "CHECKING FOR FAILED SYSTEMD SERVICES"
-if systemctl --failed --quiet; then
-  echo "✅ No failed services found."
-else
-  echo "⚠️ Some services have failed:"
-  systemctl --failed --no-pager --plain
-fi
-
-# -------------------------------------
-# Finished
-# -------------------------------------
-
-announce "✅ Spring‑Clean Completed in ${SECONDS}s"
-echo "Full log saved to: $LOG_FILE"
-
-# -------------------------------------
+echo ""
+gum_safe style --padding "1" "✨ Maintenance Complete."
+gum_safe style --foreground "$MOCHA_GREEN" --bold "🎉 All tasks completed! Review the log at: $LOG_FILE"
+sub_text "Press any key to exit..."
+read -n 1
