@@ -19,11 +19,11 @@ if [ "$#" -lt 3 ]; then
     APP_LOCATION=$(gum input --prompt "URL> " --placeholder "https://github.com")
     DOMAIN=$(echo "$APP_LOCATION" | awk -F[/:] '{print $4}' | sed 's/^www\.//')
     APP_ID="chrome-$DOMAIN"
-    [[ "$SINGLETON" == "yes" ]] && CUSTOM_EXEC="launch-or-focus-webapp \"$APP_ID\" \"$APP_LOCATION\"" || CUSTOM_EXEC="launch-webapp \"$APP_LOCATION\""
+    [[ "$SINGLETON" == "yes" ]] && CUSTOM_EXEC="smart-launch --web \"$APP_ID\" \"$APP_LOCATION\"" || CUSTOM_EXEC="smart-launch --web -n \"$APP_ID\" \"$APP_LOCATION\""
   else
     APP_ID=$(echo "$APP_NAME" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | sed 's/[^a-z0-9-]//g')
     APP_LOCATION=$(gum input --prompt "Path> " --placeholder "/usr/bin/htop")
-    [[ "$SINGLETON" == "yes" ]] && CUSTOM_EXEC="launch-or-focus-tui \"$APP_ID\" \"$APP_LOCATION\"" || CUSTOM_EXEC="launch-tui \"$APP_ID\" \"$APP_LOCATION\""
+    [[ "$SINGLETON" == "yes" ]] && CUSTOM_EXEC="smart-launch --tui \"$APP_ID\" \"$APP_LOCATION\"" || CUSTOM_EXEC="smart-launch --tui -n \"$APP_ID\" \"$APP_LOCATION\""
   fi
 else
   APP_NAME="$1"; APP_LOCATION="$2"; ICON_REF="$3"; CUSTOM_EXEC="$4"; MIME_TYPES="$5"

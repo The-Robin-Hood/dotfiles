@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Name=YT Music
-Exec=launch-or-focus-webapp "chrome-music.youtube.com" "https://music.youtube.com"
+Exec=smart-launch --web "chrome-music.youtube.com" "https://music.youtube.com"
 Terminal=false
 Type=Application
 Icon=/home/robin/.assets/icons/youtube-music.png

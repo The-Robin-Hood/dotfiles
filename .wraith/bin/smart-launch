@@ -1,0 +1,123 @@
+#!/usr/bin/env bash
+
+# ==============================================================================
+# smart-launch
+# A unified script to focus a Hyprland window if it exists, or launch it if not.
+# Supports Standard GUI apps, TUIs (via xdg-terminal-exec), and Web Apps.
+# ==============================================================================
+
+show_help() {
+    echo "Usage: $(basename "$0") [OPTIONS] <PATTERN> [COMMAND/URL]"
+    echo ""
+    echo "Options:"
+    echo "  -t, --tui      Launch as a Terminal UI (sets specific App ID)"
+    echo "  -w, --web      Launch as a Web App (using --app mode)"
+    echo "  -c, --cmd      Custom launch command (overrides default behavior)"
+    echo "  -n, --new      Force a new instance (do not focus existing windows)"
+    echo "  -h, --help     Show this help message"
+    echo ""
+    echo "Examples:"
+    echo "  Standard:      $(basename "$0") firefox"
+    echo "  New Instance:  $(basename "$0") --new firefox"
+    echo "  TUI:           $(basename "$0") --tui btop"
+}
+
+# --- Browser Detection ---
+get_browser() {
+    local browser
+    browser=$(xdg-settings get default-web-browser)
+    case $browser in
+        google-chrome*|brave-browser*|microsoft-edge*|opera*|vivaldi*|helium*) ;;
+        *) browser="chromium" ;;
+    esac
+    echo "$browser"
+}
+
+# --- Argument Parsing ---
+MODE="standard"
+FORCE_NEW=0
+
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        -t|--tui) MODE="tui"; shift ;;
+        -w|--web|--webapp) MODE="web"; shift ;;
+        -c|--cmd) MODE="custom"; shift ;;
+        -n|--new) FORCE_NEW=1; shift ;;
+        -h|--help) show_help; exit 0 ;;
+        -*) echo "Unknown option: $1"; show_help; exit 1 ;;
+        *) break ;;
+    esac
+done
+
+if [[ -z "$1" ]]; then
+    echo "Error: Missing arguments."
+    show_help
+    exit 1
+fi
+
+# --- Logic Configuration ---
+
+WINDOW_PATTERN="$1"
+LAUNCH_CMD=""
+
+case $MODE in
+    tui)
+        BIN_NAME=$(basename "$1")
+        BIN_NAME=${BIN_NAME// /-}
+        BIN_NAME=${BIN_NAME//./-}
+        BIN_NAME=${BIN_NAME%-}
+        APP_ID="org.wraith.${BIN_NAME}"
+        WINDOW_PATTERN="$APP_ID"
+        
+        shift
+        if [[ -n "$1" ]]; then CMD_ARGS="$@"; else CMD_ARGS="$BIN_NAME"; fi
+        LAUNCH_CMD="uwsm-app -- xdg-terminal-exec --app-id='$APP_ID' -e $CMD_ARGS"
+        ;;
+
+    web)
+        shift
+        URL="$1"
+        shift
+        EXTRA_ARGS="$@"
+        BROWSER=$(get_browser)
+        LAUNCH_CMD="uwsm-app -- $BROWSER --app=$URL $EXTRA_ARGS"
+        ;;
+
+    custom)
+        shift
+        LAUNCH_CMD="$@"
+        ;;
+
+    standard)
+        LAUNCH_CMD="uwsm-app -- $WINDOW_PATTERN"
+        ;;
+esac
+
+# --- Hyprland Detection Logic ---
+
+WINDOW_ADDRESS=""
+
+# Only check for existing windows if NOT forcing a new instance
+if [[ $FORCE_NEW -eq 0 ]]; then
+    WINDOW_ADDRESS=$(hyprctl clients -j | jq -r --arg p "$WINDOW_PATTERN" '
+      map(select(
+        (.class | test("\\b" + $p + "\\b"; "i")) or
+        (.initialClass | test("\\b" + $p + "\\b"; "i")) or
+        (.class | contains($p)) or
+        (.class | test($p; "i"))
+      ))
+      | sort_by(.focusHistoryID)
+      | reverse
+      | .[0].address // empty'
+    )
+fi
+
+# --- Execution ---
+
+if [[ -n $WINDOW_ADDRESS && $WINDOW_ADDRESS != "null" ]]; then
+    echo "Focusing window: $WINDOW_PATTERN ($WINDOW_ADDRESS)"
+    hyprctl dispatch focuswindow "address:$WINDOW_ADDRESS"
+else
+    echo "Launching new instance: $LAUNCH_CMD"
+    eval exec setsid $LAUNCH_CMD &>/dev/null &
+fi

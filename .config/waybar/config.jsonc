@@ -17,7 +17,7 @@
     "format": "󰣇",
     "interval": 0,
     "tooltip-format": "About System",
-    "on-click": "launch-or-focus-tui \"about\" \"bash -c 'fastfetch; read -n 1 -s'\"",
+    "on-click": "smart-launch --tui 'about-system' 'bash -c \"fastfetch; read -n 1 -s\"'"
   },
 
   "hyprland/workspaces#main": {
