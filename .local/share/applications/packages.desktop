@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Packages
+Exec=/home/robin/.wraith/scripts/packages.sh
+Terminal=false
+Type=Application
+Icon=/home/robin/.assets/icons/arch.png
+StartupNotify=true
+
