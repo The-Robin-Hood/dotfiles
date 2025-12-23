@@ -129,10 +129,15 @@ sub_text() {
 
 show_header
 
+# get sudo upfront
+if ! sudo -v; then
+  gum_safe style --foreground "$MOCHA_RED" "❌ Error: Sudo authentication failed."
+  exit 1
+fi
+
 # --- Step 1 ---
 section_title "1. System Upgrade"
 if gum_safe confirm "Upgrade system packages?"; then
-  sudo -v
   $AUR_HELPER -Syu
 else
   sub_text "Skipped upgrade."
@@ -159,7 +164,7 @@ else
   echo "$ORPHANS" | gum_safe format
 
   if gum_safe confirm "Remove orphaned packages?"; then
-    run_task "Removing orphaned packages" "sudo $AUR_HELPER -Rns $ORPHANS"
+    run_task "Removing orphaned packages" "sudo pacman -Rns $ORPHANS"
   else
     sub_text "Skipped orphan removal."
   fi
@@ -201,6 +206,5 @@ fi
 
 echo ""
 gum_safe style --padding "1" "✨ Maintenance Complete."
-gum_safe style --foreground "$MOCHA_GREEN" --bold "🎉 All tasks completed! Review the log at: $LOG_FILE"
-sub_text "Press any key to exit..."
-read -n 1
+gum_safe style --foreground "$MOCHA_GREEN" --bold "Review the log at: $LOG_FILE"
+gum spin --spinner "moon" --title "Press any key to close..." -- bash -c 'read -n 1 -s'

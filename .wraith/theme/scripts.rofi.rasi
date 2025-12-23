@@ -1,18 +1,13 @@
 @import "wraith-theme.rasi"
 
 mainbox {
-    padding:    0px;
-    margin: 0px;
+    padding: 10px;
+    margin: 10px;
 }
 
 inputbar {
     enabled:false;
     padding:0px;
-}
-
-listview {
-    margin:0px;
-    lines:5;
 }
 
 element {

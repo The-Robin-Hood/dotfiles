@@ -17,22 +17,56 @@ packages_total() {
 
 
 packages_installed_explicitly() {
-    out=$''
-    while IFS= read -r pkg; do
-        info=$(pacman -Qi -- "$pkg")
-        name=$(printf "%s" "$info" | awk -F': ' '/^Name/{print $2}')
-        ver=$(printf "%s" "$info" | awk -F': ' '/^Version/{print $2}')
-        desc=$(printf "%s" "$info" | awk -F': ' '/^Description/{print $2}')
+    out=$(pacman -Qi - < <(
+            pacman -Qiqe | awk -F': ' '/^Name/ {name=$2}/^Install Date/ { 
+                cmd = "date -d \"" $2 "\" +\"%Y-%m-%d %H:%M:%S\""
+                cmd | getline iso
+                close(cmd)
+                print iso, name
+            }' | sort -r | awk '{print $NF}'
+        ) | awk -v RS= '
+            {
+                # Extract fields using Regex from the full text block
+                match($0, /Name[[:space:]]*:[[:space:]]*([^\n]*)/, n)
+                match($0, /Version[[:space:]]*:[[:space:]]*([^\n]*)/, v)
+                match($0, /Description[[:space:]]*:[[:space:]]*([^\n]*)/, d)
+                
+                name = n[1]
+                ver = v[1]
+                desc = d[1]
 
-        short_desc=$(printf "%.80s" "$desc")
-        [[ ${#desc} -gt 80 ]] && short_desc="${short_desc}…"
+                # Truncate Description
+                if (length(desc) > 80) desc = substr(desc, 1, 80) "…"
+                
+                # Escape Ampersands (Critical for Rofi Pango markup)
+                gsub("&", "&amp;", desc)
+                gsub("<", "&lt;", desc)
+                gsub(">", "&gt;", desc)
 
-        out+=$'📦  '"<b>$name</b> ($ver)"$'\n'"<span size=\"small\">$short_desc</span>"$'\x0f'
+                # Output formatted string
+                printf "📦 <b>%s</b> (%s)\n<span size=\"small\">%s</span>\x0f", name, ver, desc
+            }
+        ')
+    selected_package_raw=$(printf "%b" "$out" | rofi -dmenu -sep $'\x0f' -eh 2 -i -p "Packages :" -no-show-icons -markup-rows -no-cycle -theme-str 'listview {lines:5;}')
 
-    done < <(pacman -Qiqe | awk -F': ' '/^Name/ {name=$2}/^Install Date/ {print $2 " " name}' | sort -r | awk '{print $NF}')
-    printf "%b" "$out" | rofi -dmenu -sep $'\x0f' -eh 2 -i -p "Packages :" -no-show-icons -markup-rows -no-cycle
+    if [[ -n "$selected_package_raw" ]]; then
+        pkg_name=$(echo "$selected_package_raw" | sed -E 's/.*<b>([^<]+)<\/b>.*/\1/' | head -n 1)
+
+        action=$(printf "Info\nUninstall\nCancel" | rofi -dmenu -i -theme $HOME/.wraith/theme/scripts.rofi.rasi -theme-str 'listview {lines:3;}')
+        case "$action" in
+            "Info")
+                smart-launch --tui "Package Info $pkg_name" "bash -c 'pacman -Qi $pkg_name; gum spin --spinner moon --title \"Press any key to close...\" -- bash -c \"read -n 1 -s\"'"
+                ;;
+            "Uninstall")
+                smart-launch --tui "Uninstall Package $pkg_name" "bash -c 'sudo pacman -Rns $pkg_name --noconfirm;  gum spin --spinner moon --title \"Press any key to close...\" -- bash -c \"read -n 1 -s\"'"
+                ;;
+            *)
+                exit 0
+                ;;
+        esac
+    fi
+
 }
-
 
 case "$1" in
     "details")
