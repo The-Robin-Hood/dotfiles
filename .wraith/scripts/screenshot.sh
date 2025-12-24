@@ -12,7 +12,7 @@ OPTIONS=(
 # Show rofi menu and get selected option
 CHOICE=$(printf "%s\n" "${OPTIONS[@]}" | rofi -dmenu -i -p "Screenshot Menu" -theme $HOME/.wraith/theme/scripts.rofi.rasi -theme-str 'listview {lines:6;}' 2>/dev/null)
 
-SCREENSHOT_DIR=$HOME/dev/desktop/screenshots
+SCREENSHOT_DIR=$HOME/desktop/screenshots
 mkdir -p "$SCREENSHOT_DIR"  # Ensure directory exists
 
 case "$CHOICE" in
