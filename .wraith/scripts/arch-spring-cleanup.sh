@@ -74,14 +74,6 @@ LOG_DIR="$HOME/.local/var/log"
 mkdir -p "$LOG_DIR"
 LOG_FILE="$LOG_DIR/maintenance-$(date +%F_%H-%M-%S).log"
 
-CACHE_TARGETS=(
-  "$HOME/.cache/thumbnails"
-  "$HOME/.cache/yay"
-  "$HOME/.cache/paru"
-  "$HOME/.cache/pip"
-  "$HOME/.cache/npm"
-)
-
 AUR_HELPER="yay"
 
 if ! command -v gum &>/dev/null || ! command -v yay &>/dev/null || ! command -v paccache &>/dev/null; then
@@ -174,12 +166,23 @@ fi
 section_title "4. User Cache"
 sub_text "Targets: thumbnails, yay, paru, pip, npm"
 
-if gum_safe confirm "Clean specific cache targets?"; then
-  for target in "${CACHE_TARGETS[@]}"; do
-    [[ -d "$target" ]] && run_task "Cleaning $target" "rm -rf $target/*"
-  done
+LARGE_CACHES=(${(f)"$(du -d 1 -h ~/.cache 2>/dev/null | grep -E '^([5-9][0-9][0-9]M|[0-9]+(\.[0-9]+)?G)' | grep -vE "\.cache$")"})
+
+if [[ ${#LARGE_CACHES[@]} -eq 0 ]]; then
+    sub_text "Everything is clean! No folders > 500MB."
 else
-  sub_text "Skipped user cache."
+    SELECTED=$(printf "%s\n" "${LARGE_CACHES[@]}" | gum choose --no-limit --header "Select caches to wash")
+
+    if [[ -z "$SELECTED" ]]; then
+        sub_text "Skipped user cache."
+    else
+        echo "$SELECTED" | while read -r line; do
+            TARGET_PATH=$(echo "$line" | awk '{print $2}')
+            if [[ -d "$TARGET_PATH" ]]; then
+                run_task "Cleaning ${TARGET_PATH}" "rm -rf ${TARGET_PATH:?}/*"
+            fi
+        done
+    fi
 fi
 
 # --- Step 5 ---

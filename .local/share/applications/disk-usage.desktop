@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Disk Usage
+Exec=smart-launch --tui "disk-usage" "bash -c 'wdu;dust -r; read -n 1 -s'"
+Terminal=false
+Type=Application
+Icon=/home/robin/.assets/icons/shell.png
+StartupNotify=true
+
