@@ -16,9 +16,15 @@ return {
 
 			window = {
     			position = "right",
-				width = 30,
-				mappings = {
-	      			["l"] = "focus_preview"
+					width = 30,
+					mappings = {
+						["P"] = {
+							"toggle_preview",
+							config = {
+								use_float = true,
+								title = 'Preview'
+							}
+						}
 				}
 			},
 
