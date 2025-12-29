@@ -1,6 +1,6 @@
 #!/bin/zsh 
 
-STATE_FILE="$HOME/.wraith/states/brightness.state"
+STATE_FILE="$HOME/.local/state/wraith/brightness.state"
 LOCK_FILE="/tmp/brightness.lock"
 DEFAULT_STEP=5
 DEFAULT_FALLBACK=10
