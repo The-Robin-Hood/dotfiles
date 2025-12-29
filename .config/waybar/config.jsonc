@@ -3,7 +3,7 @@
   "position": "top",
   "height": 32,
   "spacing": 0,
-  "modules-left": ["custom/about","clock", "custom/packages"],
+  "modules-left": ["custom/about", "clock", "custom/packages"],
   "modules-center": ["hyprland/workspaces#main"],
   "modules-right": [
     "hyprland/workspaces#special",
@@ -40,7 +40,8 @@
     "format": "{icon}",
     "format-icons": {
       "music": "󰎆",
-      "temp":"󰒋"
+      "3d": "󰭼",
+      "temp": "󰒋"
     },
     "ignore-workspaces": ["^([0-9]|10)$"]
   },
