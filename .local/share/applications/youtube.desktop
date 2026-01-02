@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Youtube
+Exec=smart-launch --web --new "chrome-youtube.com" "https://youtube.com"
+Terminal=false
+Type=Application
+Icon=/home/robin/.assets/icons/youtube.png
+StartupNotify=true
+
