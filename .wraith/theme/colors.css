@@ -1,0 +1,12 @@
+@define-color bg0 #1e1e2e;
+@define-color fg0 #b4befe;
+@define-color bg1       #313244; 
+@define-color bg2       #45475a;
+@define-color fg_dim    #bac2de; 
+
+@define-color succ #a6e3a1;
+@define-color errr #e78284;
+@define-color warn #fab387;
+
+@define-color info_blue     #89b4fa;
+@define-color accent_pink   #f5c2e7;
