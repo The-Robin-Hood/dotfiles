@@ -7,7 +7,6 @@
   "modules-center": ["hyprland/workspaces#main"],
   "modules-right": [
     "hyprland/workspaces#special",
-    "custom/special_workspaces",
     "custom/brightness",
     "pulseaudio",
     "custom/notification",
@@ -26,25 +25,24 @@
     "show-special": false,
     "format": "{icon}",
     "format-icons": {
-      "1": "",
-      "2": "",
-      "3": ""
-    },
-    "persistent-workspaces": {
-      "*": ["1", "2", "3"]
+      "AI": "󱚝",
+      "Code": "",
+      "Research": "",
+      "Misc": "",
+      "Forge": "󰐫"
     }
   },
 
   "hyprland/workspaces#special": {
     "disable-scroll": false,
+    "sort-by": "id",
     "show-special": true,
     "format": "{icon}",
     "format-icons": {
       "youtube": "",
-      "music": "󰎆",
-      "3d": "󰭼"
+      "music": "󰎆"
     },
-    "ignore-workspaces": ["^([0-9]|10)$"]
+    "ignore-workspaces": ["^(?!.*(youtube|music)).*$"]
   },
 
   "clock": {

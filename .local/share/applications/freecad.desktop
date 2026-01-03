@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=FreeCAD
+Exec="/opt/AppImages/FreeCAD_1.0.2-conda-Linux-x86_64-py311.AppImage"
+Terminal=false
+Type=Application
+Icon=/home/robin/.assets/icons/freecad.png
+StartupNotify=true
+

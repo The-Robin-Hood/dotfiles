@@ -3,7 +3,7 @@ alias src="source $HOME/.zshrc"
 alias la="ls -a"
 alias ccat="bat --color=always"
 alias vim=nvim
-alias decompress="tar -xzf"
+alias decompress="tar -xf"
 
 if command -v eza &> /dev/null; then
   alias ls='eza -lah --group-directories-first --icons=auto --no-user --no-filesize --no-permissions --time-style=long-iso'
