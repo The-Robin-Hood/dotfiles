@@ -79,7 +79,8 @@ case $MODE in
         URL="$1"
         shift
         EXTRA_ARGS="$@"
-        BROWSER=$(get_browser)
+        # BROWSER=$(get_browser)
+        BROWSER="chromium-pwa"
         LAUNCH_CMD="uwsm-app -- $BROWSER --app=$URL $EXTRA_ARGS"
         ;;
 

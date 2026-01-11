@@ -1,0 +1,9 @@
+#!/bin/bash
+exec chromium \
+  --user-data-dir="$HOME/.config/chromium-pwa" \
+  --disable-extensions \
+  --disable-sync \
+  --disable-features=Translate,MediaRouter,GlobalMediaControls \
+  --no-default-browser-check \
+  --no-first-run \
+  "$@"

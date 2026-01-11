@@ -3,7 +3,7 @@
   "position": "top",
   "height": 32,
   "spacing": 0,
-  "modules-left": ["custom/about", "clock", "custom/packages"],
+  "modules-left": ["custom/about","clock#date" ,"clock#time", "custom/packages"],
   "modules-center": ["hyprland/workspaces#main"],
   "modules-right": [
     "hyprland/workspaces#special",
@@ -26,9 +26,9 @@
     "format": "{icon}",
     "format-icons": {
       "AI": "󱚝",
-      "Code": "",
+      "Code": "",
       "Research": "",
-      "Misc": "",
+      "Terminal": "",
       "Forge": "󰐫"
     }
   },
@@ -44,23 +44,16 @@
     },
     "ignore-workspaces": ["^(?!.*(youtube|music)).*$"]
   },
+	"clock#date":{
+		"format": "{:%d-%m-%y}",
+		"interval":3600,
+		"tooltip":false
+	},
 
-  "clock": {
+  "clock#time": {
+    "format": "{:%I:%M %p}",
     "interval": 1,
     "timezone": "Asia/Kolkata",
-    "format": "󰥔  {:%I:%M %p}",
-    "tooltip-format": "<tt>{calendar}</tt>",
-    "calendar": {
-      "weeks-pos": "",
-      "on-scroll": 1,
-      "mode-mon-col": 3,
-      "format": {
-        "months": "<span size='large' color='#b4befe'><b>{}</b></span>",
-        "weekdays": "<span size='large' color='#f9e2af'><b>{}</b></span>",
-        "days": "<span size='large' color='#cdd6f4'><b>{}</b></span>",
-        "today": "<span size='large' color='#f38ba8'><b><u>{}</u></b></span>"
-      }
-    }
   },
   "custom/packages": {
     "exec": "$HOME/.wraith/scripts/packages.sh details",

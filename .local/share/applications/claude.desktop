@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Claude AI
+Exec=smart-launch --web "chrome-claude.ai" "https://claude.ai"
+Terminal=false
+Type=Application
+Icon=/home/robin/.assets/icons/claude.png
+StartupNotify=true
+
