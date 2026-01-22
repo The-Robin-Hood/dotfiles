@@ -10,6 +10,7 @@
     "custom/brightness",
     "pulseaudio",
     "custom/notification",
+    "custom/internet",
     "custom/power"
   ],
 
@@ -53,7 +54,7 @@
   "clock#time": {
     "format": "{:%I:%M %p}",
     "interval": 1,
-    "timezone": "Asia/Kolkata",
+    "timezone": "Asia/Kolkata"
   },
   "custom/packages": {
     "exec": "$HOME/.wraith/scripts/packages.sh details",
@@ -62,6 +63,11 @@
     "cursor": false,
     "on-click": "$HOME/.wraith/scripts/packages.sh",
     "tooltip": true
+  },
+  "custom/internet": {
+    "exec": "$HOME/.wraith/scripts/internet-connectivity.sh",
+    "interval": 5,
+    "return-type": "json"
   },
   "custom/power": {
     "format": "󰐥",

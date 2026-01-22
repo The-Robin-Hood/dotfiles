@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Notion
+Exec=smart-launch --web "chrome-notion.so" "https://notion.so"
+Terminal=false
+Type=Application
+Icon=/home/robin/.assets/icons/notion.png
+StartupNotify=true
+

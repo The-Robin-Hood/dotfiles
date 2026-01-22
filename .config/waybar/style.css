@@ -34,6 +34,7 @@ menuitem:hover {
 #custom-power,
 #custom-brightness,
 #custom-notification,
+#custom-internet,
 #pulseaudio,
 #workspaces.special {
   background-color: #241f31;
@@ -60,7 +61,8 @@ menuitem:hover {
   min-width: 20px;
 }
 
-#custom-notification{
+#custom-notification,
+#custom-internet {
   margin-right: 5px;
 }
 

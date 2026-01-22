@@ -6,6 +6,6 @@
 [alias]
 	lg = log --oneline --graph --all
 [core]
-	editor = vim
+	editor = nvim
 [fetch]
 	prune = true
