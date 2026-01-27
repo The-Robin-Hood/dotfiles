@@ -1,17 +1,14 @@
 #!/usr/bin/zsh
-
 STATE=$(nmcli -t -f STATE g)
 CONNECTIVITY=$(nmcli -t -f CONNECTIVITY g)
 
-
 if [[ "$STATE" != "connected" ]]; then
-    echo "󰢿 Disconnected"
+    echo "{\"text\": \"󰌙\"}"
     exit 0
 fi
 
-# If connected, check how
 if [[ "$CONNECTIVITY" == "full" ]]; then
-    ICON="󰢾"   # full connectivity
+    ICON=""   # full connectivity
 elif [[ "$CONNECTIVITY" == "limited" ]]; then
     ICON="󰤧"   # limited connectivity
 else

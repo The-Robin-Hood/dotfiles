@@ -15,6 +15,12 @@ packages_total() {
 
 }
 
+show_pkg_info() {
+  local pkg="$1"
+  pacman -Qi "$pkg" 2>&1 | zenity --text-info \
+    --title="Package Info: $pkg" \
+    --font="monospace 10"
+}
 
 packages_installed_explicitly() {
     out=$(pacman -Qi - < <(
@@ -55,7 +61,7 @@ packages_installed_explicitly() {
         action=$(printf "Info\nUninstall\nCancel" | rofi -dmenu -i -theme $HOME/.wraith/theme/scripts.rofi.rasi -theme-str 'listview {lines:3;}')
         case "$action" in
             "Info")
-                smart-launch --tui "Package Info $pkg_name" "bash -c 'pacman -Qi $pkg_name; gum spin --spinner moon --title \"Press any key to close...\" -- bash -c \"read -n 1 -s\"'"
+                show_pkg_info "$pkg_name"
                 ;;
             "Uninstall")
                 smart-launch --tui "Uninstall Package $pkg_name" "bash -c 'sudo pacman -Rns $pkg_name --noconfirm;  gum spin --spinner moon --title \"Press any key to close...\" -- bash -c \"read -n 1 -s\"'"
