@@ -118,7 +118,7 @@
   "bar.workspaces.icons.active": "",
   "bar.workspaces.icons.occupied": "",
   "bar.workspaces.icons.available": "",
-  "wallpaper.image": "/home/robinhood/.assets/wallpapers/gwen-stacy.jpg",
+  "wallpaper.image": "/home/robin/.assets/wallpapers/gwen-stacy.jpg",
   "theme.osd.enable": false,
   "menus.volume.raiseMaximumVolume": false,
   "theme.bar.buttons.workspaces.pill.active_width": "9em",

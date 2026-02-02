@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Name=Arch Cleanup
-Exec=smart-launch --tui "arch-cleanup" "/home/robin/.wraith/scripts/arch-spring-cleanup.sh"
+Exec=smart-launch --tui "arch-cleanup" "$HOME/.wraith/scripts/arch-spring-cleanup.sh"
 Terminal=false
 Type=Application
 Icon=/home/robin/.assets/icons/shell.png
