@@ -6,46 +6,108 @@ gum style --foreground 212 --border double --border-foreground 212 --padding "1 
 ┃╻┃┣┳┛┣━┫┃ ┃ ┣━┫   ┃  ┣┳┛┣━┫┣╸  ┃ 
 ┗┻┛╹┗╸╹ ╹╹ ╹ ╹ ╹   ┗━╸╹┗╸╹ ╹╹   ╹ 
 
-Install a Web App or TUI App to your system
+Install Web Apps, TUI Apps, or AppImages
 "
 
 if [ "$#" -lt 3 ]; then
-  TUI_OR_WEBAPP=$(gum choose "Web App" "TUI App")
-  APP_NAME=$(gum input --prompt "Name> " --placeholder "Github Desktop")
-  ICON_REF=$(gum input --prompt "Icon URL/Path> " --placeholder "https://example.com/icon.png")
+  APP_TYPE=$(gum choose "Web App" "TUI App" "AppImage")
+  APP_NAME=$(gum input --prompt "Name> " --placeholder "GitHub Desktop")
+  ICON_REF=$(gum input --prompt "Icon URL/Path (optional)> " --placeholder "https://example.com/icon.png")
   SINGLETON=$(gum confirm "Singleton app (focus existing instance)?" && echo "yes" || echo "no")
-
-  if [ "$TUI_OR_WEBAPP" == "Web App" ]; then
-    APP_LOCATION=$(gum input --prompt "URL> " --placeholder "https://github.com")
-    DOMAIN=$(echo "$APP_LOCATION" | awk -F[/:] '{print $4}' | sed 's/^www\.//')
-    APP_ID="chrome-$DOMAIN"
-    [[ "$SINGLETON" == "yes" ]] && CUSTOM_EXEC="smart-launch --web \"$APP_ID\" \"$APP_LOCATION\"" || CUSTOM_EXEC="smart-launch --web -n \"$APP_ID\" \"$APP_LOCATION\""
-  else
-    APP_ID=$(echo "$APP_NAME" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | sed 's/[^a-z0-9-]//g')
-    APP_LOCATION=$(gum input --prompt "Path> " --placeholder "/usr/bin/htop")
-    [[ "$SINGLETON" == "yes" ]] && CUSTOM_EXEC="smart-launch --tui \"$APP_ID\" \"$APP_LOCATION\"" || CUSTOM_EXEC="smart-launch --tui -n \"$APP_ID\" \"$APP_LOCATION\""
-  fi
 else
-  APP_NAME="$1"; APP_LOCATION="$2"; ICON_REF="$3"; CUSTOM_EXEC="$4"; MIME_TYPES="$5"
+  APP_NAME="$1"
+  APP_LOCATION="$2"
+  ICON_REF="$3"
+  CUSTOM_EXEC="$4"
+  MIME_TYPES="$5"
 fi
 
-# Validation
-[[ -z "$APP_NAME" || -z "$APP_LOCATION" || -z "$ICON_REF" ]] && { echo "Missing required fields"; exit 1; }
+[[ -z "$APP_NAME" ]] && { echo "App name required"; sleep 3; exit 1; }
 
 APP_ID=$(echo "$APP_NAME" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | sed 's/[^a-z0-9-]//g')
 
-# Icon Management
-ICON_DIR="$HOME/.assets/icons"
-mkdir -p "$ICON_DIR"
-if [[ $ICON_REF =~ ^https?:// ]]; then
-  ICON_PATH="$ICON_DIR/$APP_ID.png"
-  curl -sL -o "$ICON_PATH" "$ICON_REF" || { echo "Icon download failed"; exit 1; }
-else
-  ICON_PATH="$ICON_DIR/$ICON_REF"
+# ------------------ APP TYPE HANDLING ------------------
+case "$APP_TYPE" in
+  "Web App")
+    APP_LOCATION=$(gum input --prompt "URL> " --placeholder "https://github.com")
+    DOMAIN=$(echo "$APP_LOCATION" | awk -F[/:] '{print $4}' | sed 's/^www\.//')
+    APP_ID="chrome-$DOMAIN"
+    [[ "$SINGLETON" == "yes" ]] \
+      && CUSTOM_EXEC="smart-launch --web \"$APP_ID\" \"$APP_LOCATION\"" \
+      || CUSTOM_EXEC="smart-launch --web -n \"$APP_ID\" \"$APP_LOCATION\""
+    ;;
+
+  "TUI App")
+    APP_LOCATION=$(gum input --prompt "Path> " --placeholder "/usr/bin/htop")
+    [[ "$SINGLETON" == "yes" ]] \
+      && CUSTOM_EXEC="smart-launch --tui \"$APP_ID\" \"$APP_LOCATION\"" \
+      || CUSTOM_EXEC="smart-launch --tui -n \"$APP_ID\" \"$APP_LOCATION\""
+    ;;
+
+  "AppImage")
+    APPIMAGE_SRC=$(gum input --prompt "AppImage URL or Path> " --placeholder "https://example.com/app.AppImage")
+    [[ -z "$APPIMAGE_SRC" ]] && { echo "AppImage not found"; sleep 2; exit 1; }
+    
+    APPIMAGE_DIR="$HOME/.local/appimages"
+    mkdir -p "$APPIMAGE_DIR"
+
+    if [[ "$APPIMAGE_SRC" =~ ^https?:// ]]; then
+      TMP_APPIMAGE="/tmp/$APP_ID.AppImage"
+      gum spin --spinner dot --title "Downloading AppImage…" -- \
+        curl -fL "$APPIMAGE_SRC" -o "$TMP_APPIMAGE"
+      APPIMAGE_PATH="$TMP_APPIMAGE"
+    else
+      APPIMAGE_PATH="$(realpath "$APPIMAGE_SRC")"
+    fi
+
+    [[ ! -f "$APPIMAGE_PATH" ]] && { echo "AppImage not found"; sleep 2; exit 1; }
+
+    INSTALL_PATH="$APPIMAGE_DIR/$APP_ID.AppImage"
+    cp "$APPIMAGE_PATH" "$INSTALL_PATH"
+    chmod +x "$INSTALL_PATH"
+
+    CUSTOM_EXEC="$INSTALL_PATH"
+
+    # Auto icon extraction (if user didn't provide one)
+    if [[ -z "$ICON_REF" ]]; then
+      TMPDIR="$(mktemp -d)"
+      pushd "$TMPDIR" >/dev/null
+      if "$INSTALL_PATH" --appimage-extract >/dev/null 2>&1; then
+        ICON_FOUND=$(find squashfs-root -type f \( -name '*.png' -o -name '*.svg' \) | head -n 1)
+        if [[ -n "$ICON_FOUND" ]]; then
+          ICON_DIR="$HOME/.assets/icons"
+          mkdir -p "$ICON_DIR"
+          ICON_REF="$ICON_DIR/$APP_ID.${ICON_FOUND##*.}"
+          cp "$ICON_FOUND" "$ICON_REF"
+        fi
+      fi
+      popd >/dev/null
+      rm -rf "$TMPDIR"
+    fi
+    ;;
+esac
+
+# ------------------ ICON MANAGEMENT ------------------
+ICON_LINE=""
+if [[ -n "$ICON_REF" ]]; then
+  ICON_DIR="$HOME/.assets/icons"
+  mkdir -p "$ICON_DIR"
+
+  if [[ "$ICON_REF" =~ ^https?:// ]]; then
+    ICON_PATH="$ICON_DIR/$APP_ID.png"
+    curl -sL -o "$ICON_PATH" "$ICON_REF" || { echo "Icon download failed"; exit 1; }
+  else
+    ICON_PATH="$ICON_REF"
+  fi
+
+  ICON_LINE="Icon=$ICON_PATH"
 fi
 
-# Create .desktop file
-DESKTOP_FILE="$HOME/.local/share/applications/$APP_ID.desktop"
+# ------------------ DESKTOP FILE ------------------
+DESKTOP_DIR="$HOME/.local/share/applications"
+mkdir -p "$DESKTOP_DIR"
+
+DESKTOP_FILE="$DESKTOP_DIR/$APP_ID.desktop"
 
 cat >"$DESKTOP_FILE" <<EOF
 [Desktop Entry]
@@ -54,10 +116,11 @@ Name=$APP_NAME
 Exec=$CUSTOM_EXEC
 Terminal=false
 Type=Application
-Icon=$ICON_PATH
 StartupNotify=true
+$ICON_LINE
 $( [[ -n "$MIME_TYPES" ]] && echo "MimeType=$MIME_TYPES" )
 EOF
 
 chmod +x "$DESKTOP_FILE"
-gum spin --spinner dot --title "Installation complete! You can now find '$APP_NAME' in your app launcher." -- sleep 3
+
+gum spin --spinner dot --title "Installed '$APP_NAME' successfully" -- sleep 2
