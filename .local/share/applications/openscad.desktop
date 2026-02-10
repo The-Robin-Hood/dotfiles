@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=OpenScad
+Exec=/home/robin/.local/appimages/openscad.AppImage
+Terminal=false
+Type=Application
+StartupNotify=true
+Icon=/home/robin/.assets/icons/openscad.png
+
