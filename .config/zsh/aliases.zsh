@@ -2,7 +2,7 @@ alias cdd="cd $DEV"
 alias src="source $HOME/.zshrc"
 alias la="ls -a"
 alias ccat="bat --color=always"
-alias vim=nvim
+alias vim="nvim"
 alias decompress="tar -xf"
 
 if command -v eza &> /dev/null; then
@@ -10,6 +10,10 @@ if command -v eza &> /dev/null; then
   alias lsa='eza -lah --group-directories-first --icons=auto'
   alias lt='eza --tree --level=2 --long --icons --git'
   alias lta='lt -a'
+fi
+
+if command -v lazygit &> /dev/null; then
+	alias lg="lazygit"
 fi
 
 
