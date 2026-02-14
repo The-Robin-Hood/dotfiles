@@ -41,3 +41,5 @@ opt.wrap = false
 
 opt.ruler = false
 opt.showmode = false
+
+opt.clipboard:append("unnamedplus")
