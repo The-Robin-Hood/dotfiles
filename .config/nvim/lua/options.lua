@@ -1,5 +1,21 @@
 vim.g.mapleader = " "
 
+
+vim.diagnostic.config({
+  virtual_text = {
+    prefix = "",
+    spacing = 2,
+  },
+  signs = true,
+  underline = true,
+  severity_sort = true,
+  float = {
+    border = "rounded",
+    source = "always",
+  },
+})
+
+
 local opt = vim.opt
 
 opt.shortmess:append("I")
@@ -22,7 +38,7 @@ opt.undofile = true
 opt.undolevels = 10000
 opt.updatetime = 200
 opt.timeoutlen = 1500
-opt.splitbelow = true 
+opt.splitbelow = true
 opt.splitright = true
 
 opt.foldlevel = 99

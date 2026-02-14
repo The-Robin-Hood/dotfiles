@@ -158,7 +158,7 @@ return {
       dashboard.button("n", "  New file", ":ene <BAR> startinsert<CR>"),
       dashboard.button("r", "󰄉  Recent files", ":Telescope oldfiles<CR>"),
       dashboard.button("u", "󱐥  Update plugins", "<cmd>Lazy update<CR>"),
-      dashboard.button("s", "  Settings", ":e " .. config_path .. "/init.lua<CR>"),
+      dashboard.button("s", "  Settings", ":e " .. config_path .. "<CR>"),
       dashboard.button("q", "󰿅  Quit", "<cmd>q<CR>"),
     }
 
