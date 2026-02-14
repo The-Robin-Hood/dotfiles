@@ -4,8 +4,7 @@ keybind = ctrl+shift+w=close_surface
 keybind = ctrl+shift+e=new_split:right
 keybind = ctrl+shift+o=new_split:down
 keybind = ctrl+shift+r=reload_config
-keybind = ctrl+shift+f=write_scrollback_file:paste
-
+keybind = ctrl+shift+i=unbind
 font-family = Hack Nerd Font Propo
 
 background-opacity = 0.95
