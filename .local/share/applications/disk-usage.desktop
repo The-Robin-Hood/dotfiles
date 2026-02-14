@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Name=Disk Usage
-Exec=smart-launch --tui "disk-usage" "bash -c 'wdu;dust -r; read -n 1 -s'"
+Exec=smart-launch --tui "disk-usage" "bash -c 'while :; do clear;wdu; dust -r;echo; echo -n \\"r: reload  q: quit \\"; read -n1 -s k; [[ $k == r ]] || break; done'"
 Terminal=false
 Type=Application
 Icon=/home/robin/.assets/icons/shell.png
