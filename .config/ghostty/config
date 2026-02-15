@@ -7,10 +7,19 @@ keybind = ctrl+shift+r=reload_config
 keybind = ctrl+shift+i=unbind
 font-family = Hack Nerd Font Propo
 
-background-opacity = 0.95
+background-opacity = 0.9
 
 cursor-color = #b4befe
-
+custom-shader = cursor_smear.glsl
 cursor-style = bar
 cursor-style-blink = true
+
+#shell-integration = zsh
 shell-integration-features = no-cursor
+
+term = xterm-ghostty
+mouse-hide-while-typing = true
+
+command = /bin/zsh -c "tmux new"
+
+
