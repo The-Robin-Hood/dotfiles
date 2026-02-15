@@ -1,5 +1,8 @@
-# PROMPT='%{${fg_bold[blue]}%}[%t% ]%{$fg_bold[green]%} %{$fg[cyan]%}%c%{$fg_bold[blue]%} %{$fg_bold[red]%}➜ %{$fg_bold[blue]%}% %{$reset_color%}'
-PROMPT='%{${fg_bold[blue]}%}[%t% ]%{$fg_bold[green]%} %{$fg[cyan]%}%c%{$fg_bold[red]%} ➜%{$fg_bold[blue]%} % %{$reset_color%}'
+# with time and git prompt 
+#PROMPT='%{${fg_bold[blue]}%}[%t% ]%{$fg_bold[green]%} %{$fg[cyan]%}%c%{$fg_bold[red]%} ➜%{$fg_bold[blue]%} % %{$reset_color%}'
+
+PROMPT='%{${fg_bold[blue]}%}%{$fg_bold[green]%}%{$fg[cyan]%}%c%{$fg_bold[red]%} ➜%{$fg_bold[blue]%} % %{$reset_color%}'
+
 ZSH_THEME_GIT_PROMPT_PREFIX="("
 ZSH_THEME_GIT_PROMPT_SUFFIX=")"
 ZSH_THEME_GIT_PROMPT_DIRTY=""

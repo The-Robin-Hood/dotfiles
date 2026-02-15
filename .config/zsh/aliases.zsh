@@ -2,7 +2,6 @@ alias cdd="cd $DEV"
 alias src="source $HOME/.zshrc"
 alias la="ls -a"
 alias ccat="bat --color=always"
-alias vim="nvim"
 alias decompress="tar -xf"
 
 if command -v eza &> /dev/null; then
@@ -47,5 +46,26 @@ ff() {
   files=$(fzf --layout=reverse --multi --preview="bat --color=always {}" --exit-0) || return
   [ -n "$files" ] && vim "${(@f)files}"
 }
+
+vim() {
+  if [ $# -eq 0 ]; then
+    command nvim
+    return
+  fi
+
+  if [ "$1" = "." ]; then
+    command nvim "."
+    return
+  fi
+
+  if command -v zoxide &> /dev/null; then
+    local dir
+    dir="$(zoxide query "$1" 2>/dev/null)"
+    [ -n "$dir" ] && set -- "$dir" "${@:2}"
+  fi
+
+  command nvim "$@"
+}
+
 
 #--------------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 # Oh My Zsh Configuration
 ZSH_THEME="wraith"
 zstyle ':omz:update' mode reminder
-plugins=(git zsh-autosuggestions)
+plugins=(zsh-autosuggestions)
 
 # Source additional configuration files
 source $HOME/.config/zsh/exports.zsh
