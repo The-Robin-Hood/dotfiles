@@ -20,6 +20,5 @@ shell-integration-features = no-cursor
 term = xterm-ghostty
 mouse-hide-while-typing = true
 
-command = /bin/zsh -c "tmux new"
-
+command = /bin/zsh -c "tmux new -s default"
 
