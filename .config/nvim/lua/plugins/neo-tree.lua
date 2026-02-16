@@ -4,57 +4,54 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
-		"nvim-tree/nvim-web-devicons", 
-    },
-    lazy = false,
-	config= function()
+		"nvim-tree/nvim-web-devicons",
+	},
+	lazy = false,
+	config = function()
 		require("neo-tree").setup({
 			close_if_last_window = true,
-			popup_border_style = "NC",
+			popup_border_style = "rounded",
 			enable_git_status = true,
 			enable_diagnostics = true,
 
 			window = {
-    			position = "right",
-					width = 30,
-					mappings = {
-						["P"] = {
-							"toggle_preview",
-							config = {
-								use_float = true,
-								title = 'Preview'
-							}
-						}
-				}
+				position = "right",
+				width = 30,
+				mappings = {
+					["P"] = {
+						"toggle_preview",
+						config = {
+							use_float = true,
+							title = "Preview",
+						},
+					},
+				},
 			},
 
 			default_component_configs = {
 				git_status = {
-				symbols = {
-					added = "✚",
-					modified = "",
-					deleted = "✖", 
-					renamed = "󰁕", 
-					untracked = "󰎔",
-					ignored = "",
-					unstaged = "󰄱",
-					staged = "",
-					conflict = "",
+					symbols = {
+						added = "✚",
+						modified = "",
+						deleted = "✖",
+						renamed = "󰁕",
+						untracked = "󰎔",
+						ignored = "",
+						unstaged = "󰄱",
+						staged = "",
+						conflict = "",
 					},
 				},
 			},
 			filesystem = {
 				follow_current_file = {
 					enabled = true,
-					},
-					filtered_items = {
-						hide_dotfiles = false,
-						hide_gitignored = true,
-					}
-			}
+				},
+				filtered_items = {
+					hide_dotfiles = false,
+					hide_gitignored = true,
+				},
+			},
 		})
-	end
-
+	end,
 }
-
-
