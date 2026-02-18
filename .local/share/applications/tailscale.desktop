@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Tailscale
+Exec=smart-launch --web "chrome-login.tailscale.com" "https://login.tailscale.com"
+Terminal=false
+Type=Application
+StartupNotify=true
+Icon=/home/robin/.assets/icons/tailscale.png
+
