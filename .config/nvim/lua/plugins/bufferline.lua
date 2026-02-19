@@ -1,18 +1,18 @@
 return {
 	"akinsho/bufferline.nvim",
 	version = "*",
-	dependencies = "nvim-tree/nvim-web-devicons",
+	dependencies = { "nvim-tree/nvim-web-devicons", "famiu/bufdelete.nvim" },
 	config = function()
 		require("bufferline").setup({
 			options = {
 				mode = "buffers", -- Show buffers (not tabs)
 				style_preset = require("bufferline").style_preset.default,
 				themable = true,
-				numbers = "none",                -- Show 1, 2, 3... for easy jumping
-				close_command = "bdelete! %d",   -- Close buffer command
+				numbers = "none", -- Show 1, 2, 3... for easy jumping
+				close_command = "bdelete! %d", -- Close buffer command
 				right_mouse_command = "bdelete! %d", -- Close with right click
 				left_mouse_command = "buffer %d", -- Switch with left click
-				middle_mouse_command = nil,      -- Nothing on middle click
+				middle_mouse_command = nil, -- Nothing on middle click
 
 				-- Visual
 				indicator = {

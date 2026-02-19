@@ -45,4 +45,4 @@ vim.keymap.set("n", "<leader>6", ":BufferLineGoToBuffer 6<CR>", { desc = "Go to 
 vim.keymap.set("n", "<leader>7", ":BufferLineGoToBuffer 7<CR>", { desc = "Go to buffer 7", silent = true })
 vim.keymap.set("n", "<leader>8", ":BufferLineGoToBuffer 8<CR>", { desc = "Go to buffer 8", silent = true })
 vim.keymap.set("n", "<leader>9", ":BufferLineGoToBuffer 9<CR>", { desc = "Go to buffer 9", silent = true })
-
+vim.keymap.set("n", "<leader>w", ":Bdelete<CR>", {desc = "Delte current buffer"})
