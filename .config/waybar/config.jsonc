@@ -78,7 +78,7 @@
     "menu-actions": {
       "shutdown": "systemctl poweroff --no-wall",
       "reboot": "systemctl reboot --no-wall",
-      "lock": "hyprlock",
+      "lock": "swaylock --config ~/.config/sway/swaylock.conf",
       "suspend": "systemctl suspend"
     }
   },
