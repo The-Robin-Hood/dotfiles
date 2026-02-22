@@ -1,10 +1,8 @@
 configuration{
-    display-run: "CMD :";
     display-drun: "";    
-    display-calc: "Calculate :";
     drun-display-format: "{icon} {name}";
     show-icons: true;
-    modi: "run,drun,calc";
+    modi: "drun";
 }
 
 * {
