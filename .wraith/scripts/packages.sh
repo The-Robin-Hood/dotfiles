@@ -1,7 +1,6 @@
 packages_total() {
-    total=$(pacman -Qe | wc -l)
-    updates=$(pacman -Qu | wc -l)
-
+		total=$(pacman -Qe | wc -l)
+    updates=$(checkupdates | wc -l)
     if [ "$updates" -gt 0 ]; then
         text="  $total"
         tooltip="Updates available"
