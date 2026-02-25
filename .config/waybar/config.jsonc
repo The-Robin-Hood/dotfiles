@@ -28,9 +28,9 @@
     "format-icons": {
       "AI": "󱚝",
       "Code": "",
-      "Research": "",
-      "Terminal": "",
-      "Forge": "󰐫"
+      "Research": ""
+      // "Terminal": "",
+      // "Forge": "󰐫"
     }
   },
 
@@ -61,7 +61,7 @@
     "interval": 5,
     "return-type": "json",
     "cursor": false,
-    "on-click": "$HOME/.wraith/scripts/packages.sh",
+    "on-click": "$HOME/.wraith/scripts/packages.sh update",
     "tooltip": true
   },
   "custom/internet": {
