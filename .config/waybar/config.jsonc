@@ -16,8 +16,9 @@
 
   "custom/about": {
     "format": "󰣇",
-    "interval": 0,
-    "tooltip-format": "About System",
+    "interval": "once",
+    "tooltip": true,
+		"tooltip-format": "About System",
     "on-click": "smart-launch --tui 'about-system' 'bash -c \"fastfetch; read -n 1 -s\"'"
   },
 
@@ -48,13 +49,14 @@
 	"clock#date":{
 		"format": "{:%d-%m-%y}",
 		"interval":3600,
-		"tooltip":false
+		"tooltip":false,
 	},
 
   "clock#time": {
     "format": "{:%I:%M %p}",
     "interval": 1,
-    "timezone": "Asia/Kolkata"
+    "timezone": "Asia/Kolkata",
+		"tooltip":false,
   },
   "custom/packages": {
     "exec": "$HOME/.wraith/scripts/packages.sh details",
