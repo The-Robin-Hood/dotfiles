@@ -21,6 +21,7 @@ show_pkg_info() {
     --font="monospace 10"
 }
 
+
 packages_installed_explicitly() {
     out=$(pacman -Qi - < <(
             pacman -Qiqe | awk -F': ' '/^Name/ {name=$2}/^Install Date/ { 
@@ -73,11 +74,51 @@ packages_installed_explicitly() {
 
 }
 
+pkg_update(){
+
+	updates=$(pacman -Qu 2>/dev/null)
+
+	if [ -z "$updates" ]; then
+		packages_installed_explicitly 
+		exit 0
+	fi
+
+	zenity --question \
+		--title="System Updates Available" \
+		--width=600 --height=400 \
+		--ok-label="Update" \
+		--cancel-label="Ignore" \
+		--text="The following updates are available:
+
+		$updates
+
+		Do you want to update now?"
+
+	if [ $? -eq 0 ]; then
+		    (
+        pkexec pacman -Syu --noconfirm 2>&1 | while read -r line; do
+            echo "# $line"
+            echo "50"
+        done
+        echo "100"
+    ) | zenity --progress \
+        --title="Updating System" \
+        --text="Starting update..." \
+        --percentage=0 \
+        --auto-close
+		fi
+
+}
+
+
 case "$1" in
     "details")
         packages_total
         ;;
-    "")
+		"update")
+				pkg_update
+				;;
+		"")
         packages_installed_explicitly
         ;;
     *)
