@@ -76,7 +76,7 @@ packages_installed_explicitly() {
 
 pkg_update(){
 
-	updates=$(pacman -Qu 2>/dev/null)
+	updates=$(checkupdates 2>/dev/null)
 
 	if [ -z "$updates" ]; then
 		packages_installed_explicitly 
