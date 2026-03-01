@@ -1,7 +1,7 @@
 packages_total() {
 		total=$(pacman -Qe | wc -l)
     updates=$(checkupdates | wc -l)
-    if [ "$updates" -gt 0 ]; then
+    if [ "$updates" -gt 10 ]; then
         text="  $total"
         tooltip="Updates available"
     else
@@ -9,7 +9,6 @@ packages_total() {
         tooltip="Installed Packages: $total\nNo Updates available"
     fi
 
-    # Output JSON for Waybar
     printf '{"text":"%s","tooltip":"%s"}\n' "$text" "$tooltip"
 
 }
@@ -76,9 +75,9 @@ packages_installed_explicitly() {
 
 pkg_update(){
 
-	updates=$(checkupdates 2>/dev/null)
+	updates=$(checkupdates | wc -l)
 
-	if [ -z "$updates" ]; then
+	if [ "$updates" -lt 10 ]; then
 		packages_installed_explicitly 
 		exit 0
 	fi
