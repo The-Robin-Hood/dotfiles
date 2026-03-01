@@ -35,6 +35,7 @@ menuitem:hover {
 #custom-brightness,
 #custom-notification,
 #custom-internet,
+#custom-butt-out,
 #pulseaudio,
 #workspaces.special {
   background-color: #241f31;
@@ -51,8 +52,14 @@ menuitem:hover {
 }
 
 #clock,
-#custom-packages {
+#custom-packages,
+#custom-butt-out
+{
   margin-left: 5px;
+}
+
+#custom-butt-out{
+	font-size : 16px;
 }
 
 #custom-power {

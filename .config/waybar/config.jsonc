@@ -3,7 +3,7 @@
   "position": "top",
   "height": 32,
   "spacing": 0,
-  "modules-left": ["custom/about","clock#date" ,"clock#time", "custom/packages"],
+  "modules-left": ["custom/about","clock#date" ,"clock#time", "custom/packages","custom/butt-out"],
   "modules-center": ["hyprland/workspaces#main"],
   "modules-right": [
     "hyprland/workspaces#special",
@@ -34,6 +34,13 @@
       // "Forge": "󰐫"
     }
   },
+
+	"custom/butt-out" :{
+	 "exec": "$HOME/.wraith/scripts/butt-out.sh remaining",
+    "interval": 1,
+		"on-click-right": "$HOME/.wraith/scripts/butt-out.sh kill",
+    "return-type": "json"
+	},
 
   "hyprland/workspaces#special": {
     "disable-scroll": false,
