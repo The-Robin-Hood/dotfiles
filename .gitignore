@@ -1,3 +1,4 @@
 states/
 .config/tmux/plugins/
+.local/state/
 *.cache

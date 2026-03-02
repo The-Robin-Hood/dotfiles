@@ -9,3 +9,9 @@
 	editor = nvim
 [fetch]
 	prune = true
+[pull]
+	rebase = true
+[push]
+	autoSetupRemote = true
+[diff]
+	algorithm = histogram

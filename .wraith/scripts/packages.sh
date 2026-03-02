@@ -75,7 +75,8 @@ packages_installed_explicitly() {
 
 pkg_update(){
 
-	updates=$(checkupdates | wc -l)
+	update_list=$(checkupdates 2>/dev/null)
+	updates=$(echo "$update_list" | wc -l)
 
 	if [ "$updates" -lt 10 ]; then
 		packages_installed_explicitly 
@@ -87,11 +88,11 @@ pkg_update(){
 		--width=600 --height=400 \
 		--ok-label="Update" \
 		--cancel-label="Ignore" \
-		--text="The following updates are available:
+		--text="The following $updates updates are available:
 
-		$updates
+$update_list
 
-		Do you want to update now?"
+Do you want to update now?"
 
 	if [ $? -eq 0 ]; then
 		    (

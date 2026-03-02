@@ -156,8 +156,8 @@ else
   echo "$ORPHANS" | gum_safe format
 
   if gum_safe confirm "Remove orphaned packages?"; then
-    ORPHON_LIST=$(echo "$ORPHANS" | tr '\n' ' ')
-    run_task "Removing orphaned packages" "sudo pacman -Rns --noconfirm $ORPHON_LIST" 
+    ORPHAN_LIST=$(echo "$ORPHANS" | tr '\n' ' ')
+    run_task "Removing orphaned packages" "sudo pacman -Rns --noconfirm $ORPHAN_LIST" 
   else
     sub_text "Skipped orphan removal."
   fi
