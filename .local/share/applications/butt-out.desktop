@@ -4,6 +4,6 @@ Name=Butt-Out
 Exec=zsh -lc "$HOME/.wraith/scripts/butt-out.sh"
 Terminal=false
 Type=Application
-Icon=/home/robin/.assets/icons/shell.png
+Icon=YOUR_HOME/.assets/icons/shell.png
 StartupNotify=true
 

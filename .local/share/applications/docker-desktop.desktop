@@ -4,6 +4,6 @@ Name=Docker Desktop
 Exec=smart-launch --tui "docker-desktop" "lazydocker"
 Terminal=false
 Type=Application
-Icon=/home/robin/.assets/icons/docker-desktop.png
+Icon=YOUR_HOME/.assets/icons/docker-desktop.png
 StartupNotify=true
 

@@ -1,6 +1,6 @@
 [user]
-    email = ping@ansari.wtf
-    name = Ansari
+    email = you@example.com
+    name = Your Name
 [init]
 	defaultBranch = main
 [alias]
