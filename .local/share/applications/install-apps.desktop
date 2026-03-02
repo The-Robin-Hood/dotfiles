@@ -4,6 +4,6 @@ Name=Install Apps
 Exec=smart-launch --tui "install-apps" "install-app"
 Terminal=false
 Type=Application
-Icon=YOUR_HOME/.assets/icons/shell.png
+Icon=/home/robin/.assets/icons/shell.png
 StartupNotify=true
 

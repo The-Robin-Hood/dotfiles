@@ -5,5 +5,5 @@ Exec=smart-launch --web "chrome-login.tailscale.com" "https://login.tailscale.co
 Terminal=false
 Type=Application
 StartupNotify=true
-Icon=YOUR_HOME/.assets/icons/tailscale.png
+Icon=/home/robin/.assets/icons/tailscale.png
 
