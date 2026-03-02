@@ -4,6 +4,6 @@ Name=OmniTools
 Exec=smart-launch --web "chrome-omnitools.app" "https://omnitools.app/"
 Terminal=false
 Type=Application
-Icon=$HOME/.assets/icons/omnitools.png
+Icon=/home/robin/.assets/icons/omnitools.png
 StartupNotify=true
 
