@@ -134,7 +134,7 @@ set_brightness() {
     
     current=$(cat "$STATE_FILE" 2>/dev/null)
     if ! validate_brightness "$current"; then
-        current= $DEFAULT_FALLBACK
+        current=$DEFAULT_FALLBACK
         echo "Warning: Invalid state file, using fallback value: $DEFAULT_FALLBACK%" >&2
     fi
     
