@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=TLDR
+Exec=smart-launch --web -n "chrome-tldr.inbrowser.app" "https://tldr.inbrowser.app"
+Terminal=false
+Type=Application
+StartupNotify=true
+Icon=/home/robin/.assets/icons/tldr.png
+

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Firewall
+Exec=smart-launch --tui "firewall" "ufWall"
+Terminal=false
+Type=Application
+StartupNotify=true
+Icon=/home/robin/.assets/icons/firewall.png
+

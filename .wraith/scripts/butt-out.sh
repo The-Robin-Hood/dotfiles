@@ -119,15 +119,16 @@ echo "$TARGET_TIME" > "$TIME_FILE"
 (
   sleep "$SECONDS_TO_WAIT" || exit
 
-  zenity --question \
-    --title="Have To Go" \
-    --text="Time's up.\n\nShutdown now?\n\nCancel = 3 min delay"
-
-  if (( $? == 0 )); then
-    shutdown now
-  else
-    shutdown +$GRACE_MINUTES &>/dev/null
-  fi
+	shutdown now
+  # zenity --question \
+  #   --title="Have To Go" \
+  #   --text="Time's up.\n\nShutdown now?\n\nCancel = 3 min delay"
+  #
+  # if (( $? == 0 )); then
+  #   shutdown now
+  # else
+  #   shutdown +$GRACE_MINUTES &>/dev/null
+  # fi
 
   rm -f "$PID_FILE" "$TIME_FILE"
 ) &
