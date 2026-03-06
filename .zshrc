@@ -1,11 +1,10 @@
-# Oh My Zsh Configuration
-ZSH_THEME="wraith"
-zstyle ':omz:update' mode reminder
-plugins=(zsh-autosuggestions)
+export ZSH="$HOME/.config/zsh"
+source $ZSH/exports.zsh
 
-# Source additional configuration files
-source $HOME/.config/zsh/exports.zsh
-source $ZSH/oh-my-zsh.sh
-source <(fzf --zsh)
-source $HOME/.config/zsh/init.zsh
-source $HOME/.config/zsh/aliases.zsh 
+if [[ -o interactive ]]; then
+	source $ZSH/options.zsh
+	source $ZSH/init.zsh
+	source $ZSH/keybinds.zsh 
+	source $ZSH/aliases.zsh 
+	source $ZSH/plugins.zsh
+fi

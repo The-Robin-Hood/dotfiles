@@ -1,4 +1,3 @@
-states/
 .config/tmux/plugins/
-.local/state/
 *.cache
+/.config/zsh/plugins/zsh-autosuggestions

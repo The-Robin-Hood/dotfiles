@@ -4,6 +4,7 @@ alias la="ls -a"
 alias vim="nvim"
 alias ccat="bat --color=always"
 alias decompress="tar -xf"
+alias grep='rg'
 
 if command -v eza &> /dev/null; then
   alias ls='eza -lah --group-directories-first --icons=auto --no-user --no-filesize --no-permissions --time-style=long-iso'
@@ -45,7 +46,7 @@ sync-config() {
 ff() {
   local files
   files=$(fzf --layout=reverse --multi --preview="bat --color=always {}" --exit-0) || return
-  [ -n "$files" ] && vim "${(@f)files}"
+  [ -n "$files" ] && "$EDITOR" "${(@f)files}"
 }
 
 #--------------------------------------------------------------------------------
