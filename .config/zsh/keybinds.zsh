@@ -5,6 +5,10 @@ bindkey -e
 bindkey '^[[1;5C' forward-word
 bindkey '^[[1;5D' backward-word
 
+# Character deletion 
+bindkey '^?' backward-delete-char # Backspace 
+bindkey '^[[3~' delete-char # Delete
+
 # History prefix search with arrow keys
 autoload -U up-line-or-beginning-search
 zle -N up-line-or-beginning-search
