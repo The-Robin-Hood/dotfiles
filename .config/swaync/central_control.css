@@ -1,10 +1,9 @@
-@define-color text            @fg0;
-@define-color background-alt  @bg1;
-@define-color selected        @fg0;
-@define-color hover           alpha(@fg0, .4);
-@define-color urgent          @red;
-@define-color background      @bg0;
-@define-color background-sec  @bg2;
+@define-color text            @primary;
+@define-color background-alt  @secondary_container;
+@define-color selected        @secondary_fixed_dim;
+@define-color hover           alpha(@secondary_container, .4);
+@define-color urgent          @error;
+@define-color background-sec  @surface;
 
 * {
   color: @text;

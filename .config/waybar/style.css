@@ -1,27 +1,29 @@
+@import "colors.css";
+
 * {
   font-family: "JetBrains Nerd Font Propo",
                "Font Awesome 7 Free",
                "Font Awesome 7 Free Solid";
   font-weight: bold;
   font-size: 14px;
-  color: #b4befe;
+  color: @primary;
 }
 
 tooltip {
-  background: #1e1e2e;
-  border: 1px solid #b4befe;
+  background: @background;
+  border: 1px solid @outline;
   padding: 16px 18px;
   border-radius: 5px;
 }
 
 menu {
-  background: #161320;
-  color: #888888;
+  background: @background;
+  color: @on_primary;
   border-radius: 7px;
 }
 
 menuitem:hover {
-  background-color: #888888;
+  background-color: @surface_variant;
 }
 
 #waybar {
@@ -38,7 +40,7 @@ menuitem:hover {
 #custom-butt-out,
 #pulseaudio,
 #workspaces.special {
-  background-color: #241f31;
+  background-color: @background;
   padding: 4px 10px;
   font-size: 18px;
   margin-top: 10px;
@@ -80,7 +82,7 @@ menuitem:hover {
 }
 
 #workspaces.main {
-  background-color: #241f31;
+  background-color: @background;
   padding: 4px 6px;
   margin-top: 6px;
   margin-left: 6px;
@@ -98,9 +100,9 @@ menuitem:hover {
 
 #workspaces.main button,
 #workspaces.special button {
-  background: #241f31;
+  background: @background;
   border: none;
-  color: #888888;
+  color: @secondary_container; 
   padding: 0px 8px;
   padding-left: 2px;
   padding-right: 4px;
@@ -117,11 +119,11 @@ menuitem:hover {
 }
 
 #workspaces.main button.active {
-  border: 1px solid #888888;
+  border: 1px solid @secondary_container; 
   min-width: 80px;
 }
 
 #workspaces.special button.active {
-  border: 1px solid #888888;
+  border: 1px solid @secondary_container; 
   min-width: 40px;
 }
