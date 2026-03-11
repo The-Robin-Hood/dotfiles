@@ -1,6 +1,10 @@
 #!/bin/bash
 
 CURRENT_DIR="$1"
+fg=$(tmux show -gv @thm_fg)
+bg=$(tmux show -gv @thm_bg)
+surface=$(tmux show -gv @thm_surface)
+primary=$(tmux show -gv @thm_primary)
 
 # Check if we're in a git repo
 cd "$CURRENT_DIR" || exit 1
@@ -17,22 +21,22 @@ STAGED=$(git diff --cached --numstat 2>/dev/null | wc -l | tr -d ' ')
 MODIFIED=$(git diff --numstat 2>/dev/null | wc -l | tr -d ' ')
 UNTRACKED=$(git ls-files --others --exclude-standard 2>/dev/null | wc -l | tr -d ' ')
 
-OUTPUT="#[fg=#fab387]#[fg=#181825,bg=#fab387]#[fg=#11111b,bg=#fab387]󰊢 #[fg=#fab387,bg=#292a3b]#[fg=#cdd6f4,bg=#292a3b] ${BRANCH}"
+OUTPUT="#[fg=$primary]#[fg=#11111b,bg=$primary]󰊢 #[fg=$fg,bg=$surface] ${BRANCH}"
 
 if [ "$STAGED" -gt 0 ] || [ "$MODIFIED" -gt 0 ] || [ "$UNTRACKED" -gt 0 ]; then
     
     if [ "$STAGED" -gt 0 ]; then
-        OUTPUT+=" #[fg=#a6e3a1,bg=#292a3b]S:${STAGED}"
+        OUTPUT+="#[fg=#a6e3a1,bg=$surface] S:${STAGED}"
     fi
     
     if [ "$MODIFIED" -gt 0 ]; then
-        OUTPUT+=" #[fg=#f9e2af,bg=#292a3b]M:${MODIFIED}"
+        OUTPUT+="#[fg=#f9e2af,bg=$surface] M:${MODIFIED}"
     fi
     
     if [ "$UNTRACKED" -gt 0 ]; then
-        OUTPUT+=" #[fg=#89b4fa,bg=#292a3b]U:${UNTRACKED}"
+        OUTPUT+="#[fg=#89b4fa,bg=$surface] U:${UNTRACKED}"
     fi
 fi
 
-OUTPUT+="#[fg=#292a3b,bg=#181825]"
+OUTPUT+="#[fg=$surface,bg=default]"
 echo "$OUTPUT"

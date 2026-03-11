@@ -18,3 +18,18 @@ output_path = '~/.config/rofi/colors.rasi'
 input_path = "~/.config/matugen/templates/colors.css"
 output_path = "~/.config/swaync/colors.css"
 post_hook = "swaync-client -rs"
+
+[templates.ghostty]
+input_path = '~/.config/matugen/templates/ghostty'
+output_path = '~/.config/ghostty/themes/Matugen'
+post_hook = 'pkill -SIGUSR2 ghostty'
+
+[templates.tmux]
+input_path = '~/.config/matugen/templates/tmux-colors.conf'
+output_path = '~/.config/tmux/generated.conf'
+post_hook = 'tmux source-file ~/.config/tmux/tmux.conf'
+
+[templates.terminal-sequences]
+input_path = '~/.config/matugen/templates/terminal-sequences'
+output_path = "~/.cache/terminal-sequences"
+post_hook = "sed -i '/]11;/d' ~/.cache/terminal-sequences && cat ~/.cache/terminal-sequences > /dev/pts/[0-9]*"

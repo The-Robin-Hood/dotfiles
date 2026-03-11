@@ -9,10 +9,12 @@ zstyle ':completion:*' special-dirs true
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.cache/zsh_cache
 
+# ANSI colors from matugen 
+[[ -f ~/.cache/terminal-sequences ]] && (cat ~/.cache/terminal-sequences &)
+
 # Prompts
 autoload -U colors && colors
 PROMPT='%{${fg_bold[blue]}%}%{$fg_bold[green]%}%{$fg[cyan]%}%c%{$fg_bold[red]%} ➜%{$fg_bold[blue]%} % %{$reset_color%}'
-
 
 eval "$($HOME/.local/bin/mise activate zsh)"
 eval "$(zoxide init --cmd cd zsh)"
