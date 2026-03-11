@@ -5,3 +5,5 @@
 /.config/rofi/colors.rasi
 /.config/swaync/colors.css
 /.config/waybar/colors.css
+/.config/ghostty/themes/Matugen
+/.config/tmux/generated.conf
