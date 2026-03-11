@@ -1,5 +1,5 @@
-theme = Catppuccin Mocha
-
+#theme = Catppuccin Mocha
+theme = Matugen
 keybind = ctrl+shift+w=close_surface
 keybind = ctrl+shift+e=new_split:right
 keybind = ctrl+shift+o=new_split:down
@@ -7,9 +7,9 @@ keybind = ctrl+shift+r=reload_config
 keybind = ctrl+shift+i=unbind
 font-family = Hack Nerd Font Propo
 
-background-opacity = 0.97
+background-opacity = 0.81
 
-cursor-color = #b4befe
+#cursor-color = #b4befe
 custom-shader = cursor_smear.glsl
 cursor-style = bar
 cursor-style-blink = true
@@ -21,4 +21,3 @@ term = xterm-ghostty
 mouse-hide-while-typing = true
 
 command = /bin/zsh -c "tmux new"
-

@@ -70,16 +70,9 @@ element {
     border-radius:  7px;
 }
 
-element normal active {
-    text-color: @surface;
-}
-
-element alternate active {
-    text-color: @surface;
-}
-
 element selected normal, element selected active {
-    background-color:   @on-surface;
+    background-color:   @primary-fixed-dim;
+		text-color: @surface;
 }
 
 element-icon {
