@@ -33,3 +33,8 @@ post_hook = 'tmux source-file ~/.config/tmux/tmux.conf'
 input_path = '~/.config/matugen/templates/terminal-sequences'
 output_path = "~/.cache/terminal-sequences"
 post_hook = "sed -i '/]11;/d' ~/.cache/terminal-sequences && cat ~/.cache/terminal-sequences > /dev/pts/[0-9]*"
+
+[templates.gtk3]
+input_path = '~/.config/matugen/templates/gtk-colors.css'
+output_path = '~/.config/gtk-3.0/gtk.css'
+post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-{{mode}}'
