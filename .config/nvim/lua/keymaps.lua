@@ -19,7 +19,7 @@ vim.keymap.set("t", "<C-k>", "<C-\\><C-n><C-w>k", { desc = "Go to upper window" 
 vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w>l", { desc = "Go to right window" })
 
 vim.keymap.set("n", "<C-p>", "<cmd>Telescope find_files<CR>", { desc = "Telescope find files" })
-vim.keymap.set("n", "<C-S-F>", "<cmd>Telescope live_grep<CR>", { desc = "Telescope live grep " })
+vim.keymap.set("n", "<leader>f", "<cmd>Telescope live_grep<CR>", { desc = "Telescope live grep " })
 
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
 
