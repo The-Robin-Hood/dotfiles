@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Chess
+Exec=smart-launch --web "chrome-chess.com" "https://chess.com"
+Terminal=false
+Type=Application
+StartupNotify=true
+Icon=/home/robin/.assets/icons/chess.png
+

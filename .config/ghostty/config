@@ -7,7 +7,7 @@ keybind = ctrl+shift+r=reload_config
 keybind = ctrl+shift+i=unbind
 font-family = Hack Nerd Font Propo
 
-background-opacity = 0.81
+background-opacity = 0.95
 
 #cursor-color = #b4befe
 custom-shader = cursor_smear.glsl
