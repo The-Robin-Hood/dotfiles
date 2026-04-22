@@ -66,11 +66,42 @@ case "${#COLORS[@]}" in
         ;;
 esac
 
-# ── apply ─────────────────────────────────────────────────────────────────────
+# triple monitor setup
+CACHE="$HOME/.cache/awww-blend"
+mkdir -p "$CACHE"
 
-swww img "$img" \
-    --transition-fps 60 \
-    --transition-type wipe
+TOTAL_W=4080
+TOTAL_H=1920
+CENTER_Y=420
+
+TRANS="--transition-type wipe --transition-angle 0 --transition-fps 60 --transition-step 20"
+
+# Check source resolution before processing
+SRC_W=$(magick identify -format "%w" "$img")
+SRC_H=$(magick identify -format "%h" "$img")
+echo "Source: ${SRC_W}×${SRC_H} → Canvas: ${TOTAL_W}×${TOTAL_H}"
+
+if (( SRC_W < TOTAL_W || SRC_H < TOTAL_H )); then
+  echo "⚠ Image smaller than canvas — will be upscaled, expect some softness"
+fi
+
+# Lanczos = best quality filter for upscaling/downscaling
+magick "$img" \
+  -filter Lanczos \
+  -resize "${TOTAL_W}x${TOTAL_H}^" \
+  -gravity Center \
+  -extent "${TOTAL_W}x${TOTAL_H}" \
+  "$CACHE/base.png"
+
+magick "$CACHE/base.png" -crop "1080x1920+0+0"             +repage "$CACHE/left.png"
+magick "$CACHE/base.png" -crop "1920x1080+1080+${CENTER_Y}" +repage "$CACHE/center.png"
+magick "$CACHE/base.png" -crop "1080x1920+3000+0"           +repage "$CACHE/right.png"
+
+# ── apply ─────────────────────────────────────────────────────────────────────
+awww img -o HDMI-A-2 $TRANS "$CACHE/left.png"   &
+awww img -o DP-1     $TRANS "$CACHE/center.png" &
+awww img -o HDMI-A-1 $TRANS "$CACHE/right.png"  &
+wait
 
 matugen image "$img" \
     --type "scheme-${scheme}" \
