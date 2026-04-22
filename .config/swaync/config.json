@@ -89,8 +89,8 @@
           "command": "hyprpicker -an"
         },
         {
-          "label": "󰏘",
-          "command": "nwg-look"
+          "label": "󰂯",
+          "command": "smart-launch --tui 'bluetooth-setting' 'bash -c \"bluetui\"'"
         }
       ]
     }

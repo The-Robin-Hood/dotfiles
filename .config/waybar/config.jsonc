@@ -1,7 +1,8 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 32,
+	"output":"DP-1",
+	"height": 32,
   "spacing": 0,
   "modules-left": ["custom/about","clock#date" ,"clock#time", "custom/packages","custom/butt-out"],
   "modules-center": ["hyprland/workspaces#main"],
@@ -48,10 +49,10 @@
     "show-special": true,
     "format": "{icon}",
     "format-icons": {
-      "youtube": "",
-      "music": "󰎆"
+      "obs": "",
+      "music": "󰎆",
     },
-    "ignore-workspaces": ["^(?!.*(youtube|music)).*$"]
+    "ignore-workspaces": ["^(?!.*(obs|music)).*$"]
   },
 	"clock#date":{
 		"format": "{:%d-%m-%y}",
