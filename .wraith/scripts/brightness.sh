@@ -181,7 +181,7 @@ set_brightness() {
     
     echo "Setting brightness from $current% to $new_brightness%..." >&2
     
-    if ddcutil setvcp 10 $new_brightness --brief >/dev/null 2>&1; then
+    if ddcutil setvcp -b 5 10 $new_brightness --brief >/dev/null 2>&1; then
         echo "$new_brightness" > "$STATE_FILE"
         echo "✓ Brightness set to $new_brightness%" >&2
         
