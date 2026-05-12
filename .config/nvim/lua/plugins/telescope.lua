@@ -14,6 +14,9 @@ return {
 							preview_width = 0.6,
 						},
 					},
+					preview = {
+						treesitter = false,
+					},
 				},
 
 				pickers = {
