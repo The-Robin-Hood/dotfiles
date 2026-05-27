@@ -38,6 +38,7 @@ menuitem:hover {
 #custom-notification,
 #custom-internet,
 #custom-butt-out,
+#custom-handy,
 #pulseaudio,
 #workspaces.special {
   background-color: @background;
@@ -55,13 +56,19 @@ menuitem:hover {
 
 #clock,
 #custom-packages,
-#custom-butt-out
+#custom-butt-out,
+#custom-handy
 {
   margin-left: 5px;
 }
 
+#custom-handy,
 #custom-butt-out{
 	font-size : 16px;
+}
+
+#custom-handy{
+	padding-right: 12px;
 }
 
 #custom-power {
@@ -81,7 +88,9 @@ menuitem:hover {
   margin-right: 5px;
 }
 
-#workspaces.main {
+#workspaces.main,
+#workspaces.sec
+{
   background-color: @background;
   padding: 4px 6px;
   margin-top: 6px;
@@ -99,6 +108,7 @@ menuitem:hover {
 }
 
 #workspaces.main button,
+#workspaces.sec button,
 #workspaces.special button {
   background: @background;
   border: none;
@@ -118,12 +128,10 @@ menuitem:hover {
   text-shadow: none;
 }
 
-#workspaces.main button.active {
-  border: 1px solid @secondary_container; 
-  min-width: 80px;
+#workspaces.main button.active,
+#workspaces.special button.active,
+#workspaces.sec button.active {
+	border: 1px solid @secondary_container; 
+  min-width: 45px;
 }
 
-#workspaces.special button.active {
-  border: 1px solid @secondary_container; 
-  min-width: 40px;
-}
