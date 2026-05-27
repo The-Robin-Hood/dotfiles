@@ -37,9 +37,9 @@ next_index=$(( current_index + 1 ))
 next="${specials[$next_index]}"
 
 if [[ -z "$next" ]]; then
-  hyprctl dispatch togglespecialworkspace "${current#*:}"
+  hyprctl dispatch "hl.dsp.workspace.toggle_special('${current#*:}')"
 else
-  hyprctl dispatch workspace "$next"
+	hyprctl dispatch "hl.dsp.focus({workspace = '$next' })"
 fi
 
 print -r -- "$next" > "$STATE_FILE"

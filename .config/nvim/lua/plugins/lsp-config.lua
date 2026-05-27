@@ -26,7 +26,12 @@ return {
 		opts = {
 			servers = {
 				lua_ls = {
-					settings = { Lua = { diagnostics = { globals = { "vim" } } } },
+					settings = {
+						Lua = {
+							diagnostics = { globals = { "vim" } },
+							workspace = { library = { [vim.fn.expand("/usr/share/hypr/stubs/hl.meta.lua")] = true } }
+						}
+					},
 				},
 				gopls = {},
 				ts_ls = {},

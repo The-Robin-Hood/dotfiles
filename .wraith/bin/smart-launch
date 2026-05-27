@@ -117,7 +117,7 @@ fi
 
 if [[ -n $WINDOW_ADDRESS && $WINDOW_ADDRESS != "null" ]]; then
     echo "Focusing window: $WINDOW_PATTERN ($WINDOW_ADDRESS)"
-    hyprctl dispatch focuswindow "address:$WINDOW_ADDRESS"
+    hyprctl dispatch "hl.dsp.focus({ window = 'address:$WINDOW_ADDRESS' })"
 else
     echo "Launching new instance: $LAUNCH_CMD"
     eval exec setsid $LAUNCH_CMD &>/dev/null &
