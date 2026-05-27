@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Hotstar
+Exec=smart-launch --web "chrome-jiohotstar.com" "https://jiohotstar.com"
+Terminal=false
+Type=Application
+StartupNotify=true
+Icon=/home/robin/.assets/icons/hotstar.png
+

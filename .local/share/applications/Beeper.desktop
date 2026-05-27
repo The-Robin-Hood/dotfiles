@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Beeper
+Exec=/opt/AppImages/Beeper-4.2.860-x86_64.AppImage %u
+Type=Application
+Terminal=false
+Comment=The ultimate messaging app
+Categories=Network;Chat;
+MimeType=x-scheme-handler/beeper;
+StartupWMClass=Beeper
+StartupNotify=true
+X-Desktop-File-Install-Version=0.28
+Icon=/home/robin/.local/share/icons/beeper.png
