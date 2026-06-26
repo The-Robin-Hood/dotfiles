@@ -49,6 +49,7 @@ gum_safe() {
 export MOCHA_MAUVE="#cba6f7"
 export MOCHA_LAVENDER="#b4befe"
 export MOCHA_GREEN="#a6e3a1"
+export MOCHA_PEACH="#f5c2e7"
 export MOCHA_RED="#f38ba8"
 export MOCHA_TEXT="#cdd6f4"
 export MOCHA_OVERLAY="#6c7086"

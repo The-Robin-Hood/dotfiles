@@ -39,7 +39,7 @@ opt.shiftwidth = 2                   -- Indent width (2 spaces)
 opt.tabstop = 2                      -- Tab width (2 spaces)
 opt.shiftround = true                -- Round indent to multiple of shiftwidth
 opt.smartindent = true               -- Smart auto-indenting
-opt.formatexpr = "v:lua.require'lazyvim.util'.format.formatexpr()"
+opt.formatexpr = ""
 opt.formatoptions = "jcroqlnt"       -- Auto-formatting options
 
 -- ============================================
