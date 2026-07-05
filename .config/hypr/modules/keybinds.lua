@@ -7,8 +7,44 @@ hl.bind(mod .. " + M", hl.dsp.exit())
 hl.bind(mod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mod .. " + CTRL + F", hl.dsp.window.fullscreen())
 
+-- hl.bind("ALT + TAB", function()
+-- 	hl.dispatch(hl.dsp.window.cycle_next("visible"))
+-- 	hl.dispatch(hl.dsp.window.bring_to_top())
+-- end)
+
 hl.bind("ALT + TAB", function()
-	hl.dispatch(hl.dsp.window.cycle_next("visible"))
+	-- 1. Collect the active workspace ID on each monitor
+	local active_workspaces = {}
+	for _, m in ipairs(hl.get_monitors()) do
+		if m.active_workspace then
+			active_workspaces[m.active_workspace.id] = true
+		end
+	end
+
+	-- 2. Filter windows to only those on an active (visible) workspace
+	local windows = {}
+	for _, w in ipairs(hl.get_windows()) do
+		if w.workspace and active_workspaces[w.workspace.id] then
+			table.insert(windows, w)
+		end
+	end
+
+	if #windows == 0 then return end
+
+	-- 3. Find current window's position and move to the next one
+	local active = hl.get_active_window()
+	local idx = 1
+	if active then
+		for i, w in ipairs(windows) do
+			if w.address == active.address then
+				idx = i
+				break
+			end
+		end
+	end
+
+	local next_idx = (idx % #windows) + 1
+	hl.dispatch(hl.dsp.focus({ window = "address:" .. windows[next_idx].address }))
 	hl.dispatch(hl.dsp.window.bring_to_top())
 end)
 
