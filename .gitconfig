@@ -4,7 +4,7 @@
 [init]
 	defaultBranch = main
 [alias]
-	gitlog = log --oneline --graph --all
+	slog = log --oneline --graph --all
 [core]
 	editor = nvim
 [fetch]
