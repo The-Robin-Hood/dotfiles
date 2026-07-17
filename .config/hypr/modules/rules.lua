@@ -57,7 +57,7 @@ hl.window_rule({
 })
 
 hl.window_rule({
-	match = { initial_class = "code|code-oss|Code-Insiders" },
+	match = { initial_class = "code|code-oss|Code-Insiders|zenity" },
 	workspace = "name:Code",
 })
 
