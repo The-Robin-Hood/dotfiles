@@ -29,7 +29,7 @@
 			"interval": "once",
 			"tooltip": true,
 			"tooltip-format": "About System",
-			"on-click": "smart-launch --tui 'about-system' 'bash -c \"fastfetch; read -n 1 -s\"'"
+			"on-click": "smart-launch --tui 'about-system' 'bash -c \"fastfetch --disable-linewrap; read -n 1 -s\"'"
 		},
 		"hyprland/workspaces#main": {
 			"disable-scroll": false,

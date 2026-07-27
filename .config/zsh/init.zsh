@@ -18,5 +18,4 @@ PROMPT='%{${fg_bold[blue]}%}%{$fg_bold[green]%}%{$fg[cyan]%}%c%{$fg_bold[red]%} 
 
 eval "$($HOME/.local/bin/mise activate zsh)"
 eval "$(zoxide init --cmd cd zsh)"
-eval "$(keychain -q --ssh-agent-socket $HOME/.ssh/agent.sock --eval github homelab aur)"
 
