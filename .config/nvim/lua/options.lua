@@ -86,6 +86,10 @@ opt.timeoutlen = 500                 -- Key sequence timeout (ms)
 -- ============================================
 -- FOLDING
 -- ============================================
+opt.foldenable = true
+opt.foldmethod = 'expr'
+opt.foldexpr='v:lua.vim.treesitter.foldexpr()'
+
 opt.foldlevel = 99                   -- Start with all folds open
 
 -- ============================================
