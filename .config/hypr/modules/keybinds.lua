@@ -29,7 +29,9 @@ hl.bind("ALT + TAB", function()
 		end
 	end
 
-	if #windows == 0 then return end
+	if #windows == 0 then
+		return
+	end
 
 	-- 3. Find current window's position and move to the next one
 	local active = hl.get_active_window()
@@ -131,10 +133,7 @@ hl.bind("mouse:276", function()
 	ws_next()
 end) -- forward button → next
 
--- Keybard (SUPER + TAB / SUPER + SHIFT + TAB )
+-- plugin scrolloverview 
 hl.bind(mod .. " + TAB", function()
-	ws_next()
-end)
-hl.bind(mod .. " + SHIFT + TAB", function()
-	ws_prev()
+	hl.plugin.scrolloverview.overview("toggle all")
 end)
