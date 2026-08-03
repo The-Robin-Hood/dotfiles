@@ -1,3 +1,5 @@
+ local vars = require("modules.vars")
+
 hl.on("hyprland.start", function()
 	hl.exec_cmd("hyprctl setcursor ArcStarry 25")
 	hl.exec_cmd("wl-paste --type text --watch cliphist store")
@@ -8,7 +10,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("hypridle")
 	hl.exec_cmd("awww-daemon")
 
-	hl.exec_cmd("keychain add --ssh-agent-socket '/home/robin/.ssh/agent.sock' --eval github homelab aur --immediate")
+	hl.exec_cmd(vars.sshAgentRestart)
 
 	-- autostart applications
 	hl.exec_cmd("$(awk -F= '/^Exec/ {print $2; exit}' ~/.local/share/applications/Beeper.desktop)")

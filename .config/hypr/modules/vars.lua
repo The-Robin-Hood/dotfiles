@@ -8,6 +8,7 @@ return {
 	menu = "rofi -show drun",
 	cliphistMenu = "cliphist list | rofi -dmenu -p '' -no-show-icons| cliphist decode | wl-copy",
 	emojiMenu = "rofimoji -a type copy type-numerical",
+	sshAgentRestart = scripts .. "/ssh-agent-restart.sh",
 	screenshotMenu = scripts .. "/screenshot.sh",
 	cycleSpecial = scripts .. "/cycle-special-workspace.sh",
 	swaybarToggle = scripts .. "/waybar-swaync.sh",
