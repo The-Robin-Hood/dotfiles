@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Gridfinity
+Exec=smart-launch --web "chrome-gridfinitylayouttool.com" "https://gridfinitylayouttool.com"
+Terminal=false
+Type=Application
+StartupNotify=true
+
+
