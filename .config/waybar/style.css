@@ -34,6 +34,7 @@ menuitem:hover {
 #custom-packages,
 #custom-about,
 #custom-power,
+#custom-ai-creds,
 #custom-brightness,
 #custom-notification,
 #custom-internet,
@@ -82,6 +83,7 @@ menuitem:hover {
   margin-right: 5px;
 }
 
+#custom-ai-creds,
 #custom-brightness,
 #pulseaudio {
   min-width: 80px;

@@ -18,6 +18,7 @@
 		],
 		"modules-right": [
 			"hyprland/workspaces#special",
+			"custom/ai-creds",
 			"custom/brightness",
 			"pulseaudio",
 			"custom/notification",
@@ -138,6 +139,12 @@
 			"on-click": "swaync-client -t -sw",
 			"on-click-right": "swaync-client -d -sw",
 			"escape": true
+		},
+		"custom/ai-creds":{
+			"interval": 1500,
+			"exec": "$HOME/.wraith/scripts/ai-credits-checker.sh",
+			"return-type": "json",
+			"on-click": "librewolf https://openrouter.ai/activity/trends"
 		},
 		"custom/brightness": {
 			"interval": 1,
