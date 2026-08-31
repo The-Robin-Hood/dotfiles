@@ -25,6 +25,12 @@ return {
 		},
 		opts = {
 			servers = {
+				clangd = {
+					cmd = {
+						"clangd",
+						"--query-driver=/home/robin/.arduino15/packages/esp32/tools/esp-x32/*/bin/xtensa-esp32s3-elf-g++",
+					}
+				},
 				lua_ls = {
 					settings = {
 						Lua = {
