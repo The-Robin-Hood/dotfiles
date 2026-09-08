@@ -37,9 +37,9 @@
 			"show-special": false,
 			"format": "{icon}",
 			"format-icons": {
-				"AI": "󱚝",
+				"YT": "",
+				"Code": "",
 				"Research": "",
-				"Code": ""
 			}
 		},
 		"custom/butt-out": {
@@ -183,6 +183,7 @@
 			"show-special": false,
 			"format": "{icon}",
 			"format-icons": {
+				"AI":"󱚝",
 				"Communication": " ",
 				"default": "󰺕",
 				"active": ""

@@ -1,9 +1,9 @@
 -- ── Workspace ─────────────────────────────────────
-hl.workspace_rule({ workspace = "1", monitor = "HDMI-A-2" })
+hl.workspace_rule({ workspace = "1", monitor = "HDMI-A-2", default_name = "AI" })
 hl.workspace_rule({ workspace = "2", monitor = "HDMI-A-2" })
 hl.workspace_rule({ workspace = "3", monitor = "HDMI-A-2" })
 
-hl.workspace_rule({ workspace = "4", monitor = "DP-1", default_name = "AI", persistent = true })
+hl.workspace_rule({ workspace = "4", monitor = "DP-1", default_name = "YT", persistent = true })
 hl.workspace_rule({ workspace = "5", monitor = "DP-1", default_name = "Code", persistent = true })
 hl.workspace_rule({ workspace = "6", monitor = "DP-1", default_name = "Research", persistent = true })
 
@@ -74,4 +74,9 @@ hl.window_rule({
 hl.window_rule({
 	match = { initial_class = "chrome-music\\.youtube\\..*" },
 	workspace = "special:music",
+})
+
+
+hl.window_rule({
+	match = { title = "^(.*-popup)" }, float = true
 })

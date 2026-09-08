@@ -5,6 +5,7 @@ alias vim="nvim"
 alias ccat="bat --color=always"
 alias decompress="tar -xf"
 alias grep='rg'
+alias gconf="git config --list --show-origin --show-scope"
 
 if command -v eza &> /dev/null; then
   alias ls='eza -lah --group-directories-first --icons=auto --no-user --no-filesize --no-permissions --time-style=long-iso'
