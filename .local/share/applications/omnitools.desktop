@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Name=OmniTools
-Exec=smart-launch --web "chrome-omnitools.app" "https://omnitools.app/"
+Exec=smart-launch --web "brave-omnitools.app" "https://omnitools.app/"
 Terminal=false
 Type=Application
 Icon=/home/robin/.assets/icons/omnitools.png

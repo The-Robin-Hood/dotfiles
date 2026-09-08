@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Name=Hotstar
-Exec=smart-launch --web "chrome-jiohotstar.com" "https://jiohotstar.com"
+Exec=smart-launch --web "brave-jiohotstar.com" "https://jiohotstar.com"
 Terminal=false
 Type=Application
 StartupNotify=true

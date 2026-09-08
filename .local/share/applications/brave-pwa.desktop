@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=Brave (PWA profile)
+GenericName=Web Browser
+Comment=Open URL in the brave-pwa shared profile
+Exec=/home/robin/.wraith/bin/brave-pwa %U
+Terminal=false
+Type=Application
+StartupNotify=true
+Icon=brave
+MimeType=x-scheme-handler/unknown;x-scheme-handler/about;x-scheme-handler/http;x-scheme-handler/https;text/html;application/xhtml+xml;

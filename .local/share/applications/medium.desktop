@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Name=Medium
-Exec=smart-launch --web "chrome-medium.com" "https://medium.com"
+Exec=smart-launch --web "brave-medium.com" "https://medium.com"
 Terminal=false
 Type=Application
 Icon=/home/robin/.assets/icons/medium.png

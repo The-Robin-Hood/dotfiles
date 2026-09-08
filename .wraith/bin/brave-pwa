@@ -1,7 +1,6 @@
 #!/bin/bash
-exec chromium \
-  --user-data-dir="$HOME/.config/chromium-pwa" \
-  --disable-extensions \
+exec brave \
+  --user-data-dir="$HOME/.config/brave-pwa" \
   --disable-sync \
   --disable-features=Translate,MediaRouter,GlobalMediaControls \
   --no-default-browser-check \

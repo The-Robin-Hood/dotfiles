@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Name=TLDR
-Exec=smart-launch --web -n "chrome-tldr.inbrowser.app" "https://tldr.inbrowser.app"
+Exec=smart-launch --web -n "brave-tldr.inbrowser.app" "https://tldr.inbrowser.app"
 Terminal=false
 Type=Application
 StartupNotify=true

@@ -4,7 +4,7 @@ local scripts = home .. "/.wraith/scripts"
 return {
 	terminal = "uwsm-app -- xdg-terminal-exec",
 	fileManager = "smart-launch -n --tui 'file-manager' 'yazi'",
-	browser = "librewolf",
+	browser = "brave-pwa",
 	menu = "rofi -show drun",
 	cliphistMenu = "cliphist list | rofi -dmenu -p '' -no-show-icons| cliphist decode | wl-copy",
 	emojiMenu = "rofimoji -a type copy type-numerical",
