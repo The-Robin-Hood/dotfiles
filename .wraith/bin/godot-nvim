@@ -1,0 +1,4 @@
+#!/bin/bash
+
+nvim --server /tmp/godothost \
+    --remote-send "<C-\><C-N>:e $1<CR>:call cursor($2,1)<CR>"

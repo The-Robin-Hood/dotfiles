@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=Godot
+Comment=Godot Engine 4.7.2
+Exec="/home/robin/.local/AppImages/Godot_v4.7.2-stable_linux.x86_64"
+Terminal=false
+Type=Application
+Icon=/home/robin/.assets/icons/godot.png
+Categories=Development;IDE;Game;
+StartupWMClass=Godot
+MimeType=application/x-godot-project;text/x-godot-shader;text/x-godot-resource;
